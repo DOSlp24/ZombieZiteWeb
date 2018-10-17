@@ -3,8 +3,17 @@
 @playerCount = @{
     controller.playerCount
 }
+@playerNames = @{
+    controller.playerNamer
+}
+@playerSize = @{
+    controller.playerNamer.length
+}
 
 @main("Welcome to the Zombie Pit!") {
     <h1>Welcome to the Game!</h1>
     <h1>@playerCount</h1>
+    @for(i <- 0 until playerSize) {
+        <h1>@playerNames.apply(i)</h1>
+    }
 }
