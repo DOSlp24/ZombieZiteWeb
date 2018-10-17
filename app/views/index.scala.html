@@ -1,5 +1,10 @@
-@()
+@(controller: de.htwg.se.zombiezite.controller.ControllerInterface)
 
-@main("Welcome to Play") {
-  <h1>Welcome to Play!</h1>
+@playerCount = @{
+    controller.playerCount
+}
+
+@main("Welcome to the Zombie Pit!") {
+    <h1>Welcome to the Game!</h1>
+    <h1>@playerCount</h1>
 }
