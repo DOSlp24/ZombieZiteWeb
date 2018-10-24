@@ -14,14 +14,11 @@ import play.api.mvc._
 class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   val c: zombiezite.controller.ControllerInterface = ZombieZiteApp.getController()
 
+  def about() = Action { implicit request: Request[AnyContent] =>
+    c.init(2)
+    Ok(views.html.About())
+  }
 
-  /**
-    * Create an Action to render an HTML page.
-    *
-    * The configuration in the `routes` file means that this method
-    * will be called when the application receives a `GET` request with
-    * a path of `/`.
-    */
   def index() = Action { implicit request: Request[AnyContent] =>
     c.init(4)
     Ok(views.html.index(c))
