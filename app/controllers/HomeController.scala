@@ -27,5 +27,15 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     c.init(Integer.parseInt(num))
     Ok(views.html.index(c))
   }
+
+  def callWait() = Action { implicit request: Request[AnyContent] =>
+    c.wait(c.actualPlayer)
+    Ok(views.html.index(c))
+  }
+
+  def callSearch() = Action { implicit request: Request[AnyContent] =>
+    c.search(c.actualPlayer)
+    Ok(views.html.index(c))
+  }
 }
 

@@ -30,19 +30,45 @@
 @remainingActions = @{
     controller.actualPlayer.actionCounter
 }
+@inventory = @{
+    controller.actualPlayer.equipment
+}
+@zombies = @{
+    controller.zombies
+}
 
 @main("Welcome to the Zombie Pit!") {
     <h1>Welcome to the Game!</h1>
-    <h1>@playerCount Players entered:</h1>
+    <h1>@playerCount Players entered the Zombie Pit:</h1>
     @for(i <- 0 until playerCount) {
         <h1>@playerNames.apply(i)</h1>
     }
-    </br>
+    <br/>
     <h1>Actual Player: @actualPlayer</h1>
     <p>My Field: @actualField</p>
     <p>LP: @lifePoints</p>
     <p>Strength: @strength</p>
     <p>Armor: @armor</p>
     <p>Remaining Actions: @remainingActions</p>
-    <h1>Equiped Weapon: @equipedWeapon</h1>
+    <p>Equiped Weapon: @equipedWeapon</p>
+    <h1>Equipment:</h1>
+    <ul>
+    @for(i <- 0 until inventory.length) {
+        <li>@inventory.apply(i).name</li>
+    }
+    </ul>
+    @if(inventory.length == 0) {
+        <p>Inventory is empty.</p>
+    }
+    <br/>
+    <h1>Zombies:</h1>
+    <ul>
+    @for(i <- 0 until zombies.length) {
+        <li>@zombies.apply(i).name:
+            (@zombies.apply(i).actualField.p.x,@zombies.apply(i).actualField.p.y)
+            @zombies.apply(i).lifePoints LP</li>
+    }
+    </ul>
+
+
 }
