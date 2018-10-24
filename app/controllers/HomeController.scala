@@ -15,7 +15,6 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   val c: zombiezite.controller.ControllerInterface = ZombieZiteApp.getController()
 
   def about() = Action { implicit request: Request[AnyContent] =>
-    c.init(2)
     Ok(views.html.About())
   }
 
@@ -24,8 +23,8 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.index(c))
   }
 
-  def newGame() = Action { implicit request: Request[AnyContent] =>
-    c.init(2)
+  def newGame(num: String) = Action { implicit request: Request[AnyContent] =>
+    c.init(Integer.parseInt(num))
     Ok(views.html.index(c))
   }
 }

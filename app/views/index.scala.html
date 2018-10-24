@@ -9,11 +9,40 @@
 @playerSize = @{
     controller.playerNamer.length
 }
+@actualPlayer = @{
+    controller.actualPlayer.name
+}
+@equipedWeapon = @{
+    controller.actualPlayer.equippedWeapon.name
+}
+@actualField = @{
+    (controller.actualPlayer.actualField.p.x, controller.actualPlayer.actualField.p.y)
+}
+@lifePoints = @{
+    controller.actualPlayer.lifePoints
+}
+@strength = @{
+    controller.actualPlayer.strength
+}
+@armor = @{
+    controller.actualPlayer.armor
+}
+@remainingActions = @{
+    controller.actualPlayer.actionCounter
+}
 
 @main("Welcome to the Zombie Pit!") {
     <h1>Welcome to the Game!</h1>
-    <h1>@playerCount</h1>
-    @for(i <- 0 until playerSize) {
+    <h1>@playerCount Players entered:</h1>
+    @for(i <- 0 until playerCount) {
         <h1>@playerNames.apply(i)</h1>
     }
+    </br>
+    <h1>Actual Player: @actualPlayer</h1>
+    <p>My Field: @actualField</p>
+    <p>LP: @lifePoints</p>
+    <p>Strength: @strength</p>
+    <p>Armor: @armor</p>
+    <p>Remaining Actions: @remainingActions</p>
+    <h1>Equiped Weapon: @equipedWeapon</h1>
 }
