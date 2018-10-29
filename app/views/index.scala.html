@@ -36,6 +36,9 @@
 @zombies = @{
     controller.zombies
 }
+@feld= @{
+    controller.area
+}
 
 @main("Welcome to the Zombie Pit!") {
     <h1>Welcome to the Game!</h1>
@@ -70,6 +73,19 @@
     }
     </ul>
     <h1>Feld:</h1>
+    <table>
+    @for(x <- 0 until 10) {
+        <tr>
+        @for(y <- 0 until 10) {
+            @if(feld.line(x)(y).chars.length != 0) {
+                <td>@feld.line(x)(y).chars</td>
+            } else {
+                <td>-</td>
+            }
+        }
+        </tr>
+    }
+    </table>
 
 
 
