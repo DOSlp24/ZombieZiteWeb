@@ -37,5 +37,10 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     c.search(c.actualPlayer)
     Ok(views.html.index(c))
   }
+
+  def callMove(x: Int, y: Int) = Action { implicit request: Request[AnyContent] =>
+    c.move(c.actualPlayer, x, y)
+    Ok(views.html.index(c))
+  }
 }
 
