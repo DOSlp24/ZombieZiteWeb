@@ -1,92 +1,107 @@
 @(controller: de.htwg.se.zombiezite.controller.ControllerInterface)
 
-@playerCount = @{
-    controller.playerCount
-}
-@playerNames = @{
-    controller.playerNamer
-}
-@playerSize = @{
-    controller.playerNamer.length
-}
-@actualPlayer = @{
-    controller.actualPlayer.name
-}
-@equipedWeapon = @{
-    controller.actualPlayer.equippedWeapon.name
-}
-@actualField = @{
-    (controller.actualPlayer.actualField.p.x, controller.actualPlayer.actualField.p.y)
-}
-@lifePoints = @{
-    controller.actualPlayer.lifePoints
-}
-@strength = @{
-    controller.actualPlayer.strength
-}
-@armor = @{
-    controller.actualPlayer.armor
-}
-@remainingActions = @{
-    controller.actualPlayer.actionCounter
-}
-@inventory = @{
-    controller.actualPlayer.equipment
-}
-@zombies = @{
-    controller.zombies
-}
-@feld= @{
-    controller.area
-}
+    @playerCount = @{
+        controller.playerCount
+    }
 
-@main("Welcome to the Zombie Pit!") {
-    <h1>Welcome to the Game!</h1>
-    <h1>@playerCount Players entered the Zombie Pit:</h1>
-    @for(i <- 0 until playerCount) {
-        <h1>@playerNames.apply(i)</h1>
+    @playerNames = @{
+        controller.playerNamer
     }
-    <br/>
-    <h1>Actual Player: @actualPlayer</h1>
-    <p>My Field: @actualField</p>
-    <p>LP: @lifePoints</p>
-    <p>Strength: @strength</p>
-    <p>Armor: @armor</p>
-    <p>Remaining Actions: @remainingActions</p>
-    <p>Equiped Weapon: @equipedWeapon</p>
-    <h1>Equipment:</h1>
-    <ul>
-    @for(i <- 0 until inventory.length) {
-        <li>@inventory.apply(i).name</li>
+
+    @playerSize = @{
+        controller.playerNamer.length
     }
-    </ul>
-    @if(inventory.length == 0) {
-        <p>Inventory is empty.</p>
+
+    @actualPlayer = @{
+        controller.actualPlayer.name
     }
-    <br/>
-    <h1>Zombies:</h1>
-    <ul>
-    @for(i <- 0 until zombies.length) {
-        <li>@zombies.apply(i).name:
-            (@zombies.apply(i).actualField.p.x,@zombies.apply(i).actualField.p.y)
-            @zombies.apply(i).lifePoints LP</li>
+
+    @equipedWeapon = @{
+        controller.actualPlayer.equippedWeapon.name
     }
-    </ul>
-    <h1>Feld:</h1>
-    <table>
-    @for(x <- 0 until 10) {
-        <tr>
-        @for(y <- 0 until 10) {
-            @if(feld.line(x)(y).chars.length != 0) {
-                <td>@feld.line(x)(y).chars</td>
-            } else {
-                <td>-</td>
-            }
+
+    @actualField = @{
+        (controller.actualPlayer.actualField.p.x, controller.actualPlayer.actualField.p.y)
+    }
+
+    @lifePoints = @{
+        controller.actualPlayer.lifePoints
+    }
+
+    @strength = @{
+        controller.actualPlayer.strength
+    }
+
+    @armor = @{
+        controller.actualPlayer.armor
+    }
+
+    @remainingActions = @{
+        controller.actualPlayer.actionCounter
+    }
+
+    @inventory = @{
+        controller.actualPlayer.equipment
+    }
+
+    @zombies = @{
+        controller.zombies
+    }
+
+    @feld = @{
+        controller.area
+    }
+
+    @main("Welcome to the Zombie Pit!") {
+        <h1>Welcome to the Game!</h1>
+        <h1>@playerCount Players entered the Zombie Pit:</h1>
+        @for(i <- 0 until playerCount) {
+            <h1>@playerNames.apply(i)</h1>
         }
-        </tr>
+        <br/>
+        <h1>Actual Player: @actualPlayer</h1>
+        <p>My Field: @actualField</p>
+        <p>LP: @lifePoints</p>
+        <p>Strength: @strength</p>
+        <p>Armor: @armor</p>
+        <p>Remaining Actions: @remainingActions</p>
+        <p>Equiped Weapon: @equipedWeapon</p>
+        <h1>Equipment:</h1>
+        <ul>
+        @for(i <- 0 until inventory.length) {
+            <li>@inventory.apply(i).name</li>
+        }
+        </ul>
+        @if(inventory.length == 0) {
+            <p>Inventory is empty.</p>
+        }
+        <br/>
+        <h1>Zombies:</h1>
+        <ul>
+        @for(i <- 0 until zombies.length) {
+            <li>@zombies.apply(i).name:
+                (@zombies.apply(i).actualField.p.x,@zombies.apply(i).actualField.p.y)
+                @zombies.apply(i).lifePoints LP</li>
+        }
+        </ul>
+        <h1>Feld:</h1>
+        <table>
+        @for(x <- 0 until feld.laenge) {
+            <tr>
+            @for(y <- 0 until feld.breite) {
+                @if(feld.line(x)(y).chars.length != 0) {
+                    <td>
+                    @for(z <- 0 until feld.line(x)(y).chars.length) {
+                        @feld.line(x)(y).chars.apply(z).name
+                    }
+                    </td>
+                } else {
+                    <td>-</td>
+                }
+            }
+            </tr>
+        }
+        </table>
+
+
     }
-    </table>
-
-
-
-}
