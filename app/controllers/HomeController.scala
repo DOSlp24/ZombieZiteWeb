@@ -1,8 +1,9 @@
 package controllers
 
+import javax.inject._
+
 import de.htwg.se.zombiezite
 import de.htwg.se.zombiezite.ZombieZiteApp
-import javax.inject._
 import play.api.mvc._
 
 

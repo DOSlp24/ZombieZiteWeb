@@ -53,55 +53,84 @@
     }
 
     @main("Welcome to the Zombie Pit!") {
-        <h1>Welcome to the Game!</h1>
-        <h1>@playerCount Players entered the Zombie Pit:</h1>
-        @for(i <- 0 until playerCount) {
-            <h1>@playerNames.apply(i)</h1>
-        }
-        <br/>
-        <h1>Actual Player: @actualPlayer</h1>
-        <p>My Field: @actualField</p>
-        <p>LP: @lifePoints</p>
-        <p>Strength: @strength</p>
-        <p>Armor: @armor</p>
-        <p>Remaining Actions: @remainingActions</p>
-        <p>Equiped Weapon: @equipedWeapon</p>
-        <h1>Equipment:</h1>
-        <ul>
-        @for(i <- 0 until inventory.length) {
-            <li>@inventory.apply(i).name</li>
-        }
-        </ul>
-        @if(inventory.length == 0) {
-            <p>Inventory is empty.</p>
-        }
-        <br/>
-        <h1>Zombies:</h1>
-        <ul>
-        @for(i <- 0 until zombies.length) {
-            <li>@zombies.apply(i).name:
-                (@zombies.apply(i).actualField.p.x,@zombies.apply(i).actualField.p.y)
-                @zombies.apply(i).lifePoints LP</li>
-        }
-        </ul>
-        <h1>Feld:</h1>
-        <table>
-        @for(x <- 0 until feld.laenge) {
-            <tr>
-            @for(y <- 0 until feld.breite) {
-                @if(feld.line(x)(y).chars.length != 0) {
-                    <td>
-                    @for(z <- 0 until feld.line(x)(y).chars.length) {
-                        @feld.line(x)(y).chars.apply(z).name
-                    }
-                    </td>
-                } else {
-                    <td>-</td>
+        <head>
+            <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+        </head>
+        <h1 id="title" class="title">Welcome to the Game!</h1>
+        <h2 id="subtitle" class="title">@playerCount Players entered the Zombie Pit:</h2>
+        <div id="container">
+            <div id="nonarea">
+                <div id="playerNames">
+                @for(i <- 0 until playerCount) {
+                    <p>@playerNames.apply(i)</p>
                 }
-            }
-            </tr>
-        }
-        </table>
+                </div>
+                <h2>Actual Player: @actualPlayer</h2>
+                <h1 id="actionCounter">
+                @for(i <- 0 until remainingActions) {
+                    *
+                }
+                </h1>
+                <div id="statContainer">
+                    <div id="status">
+                        <h1>Status</h1>
+                        <p>My Field: @actualField</p>
+                        <p>LP: @lifePoints</p>
+                        <p>Strength: @strength</p>
+                        <p>Armor: @armor</p>
+                        <p>Equiped Weapon: @equipedWeapon</p>
+                    </div>
+                    <div id="inventory">
+                        <h1>Equipment:</h1>
 
-
+                        <table>
+                            <tr>
+                            @for(z <- 0 until 3) {
+                                @if(inventory.length > z) {
+                                    <td class="field">@inventory.apply(z).name</td>
+                                }
+                            }
+                            </tr>
+                            <tr>
+                            @for(z <- 3 until 6) {
+                                @if(inventory.length > z) {
+                                    <td class="field">@inventory.apply(z).name</td>
+                                }
+                            }
+                            </tr>
+                        </table>
+                        @if(inventory.length == 0) {
+                            <p>Inventory is empty.</p>
+                        }
+                    </div>
+                </div>
+                <h1>Zombies:</h1>
+                <ul>
+                @for(i <- 0 until zombies.length) {
+                    <li>@zombies.apply(i).name:
+                        (@zombies.apply(i).actualField.p.x,@zombies.apply(i).actualField.p.y)
+                        @zombies.apply(i).lifePoints LP</li>
+                }
+                </ul>
+            </div>
+            <div id="area">
+                <table>
+                @for(x <- 0 until feld.laenge) {
+                    <tr>
+                    @for(y <- 0 until feld.breite) {
+                        @if(feld.line(x)(y).chars.length != 0) {
+                            <td class="field">
+                            @for(z <- 0 until feld.line(x)(y).chars.length) {
+                                @feld.line(x)(y).chars.apply(z).name
+                            }
+                            </td>
+                        } else {
+                            <td class="field">-</td>
+                        }
+                    }
+                    </tr>
+                }
+                </table>
+            </div>
+        </div>
     }
