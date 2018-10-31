@@ -60,12 +60,13 @@
         <h2 id="subtitle" class="title">@playerCount Players entered the Zombie Pit:</h2>
         <div id="container">
             <div id="nonarea">
-                <div id="playerNames">
                 @for(i <- 0 until playerCount) {
-                    <p>@playerNames.apply(i)</p>
+                    @if(playerNames.apply(i) == actualPlayer) {
+                        <p id="actualPlayer" class="centered">> @playerNames.apply(i)</p>
+                    } else {
+                        <p class="centered">@playerNames.apply(i)</p>
+                    }
                 }
-                </div>
-                <h2>Actual Player: @actualPlayer</h2>
                 <h1 id="actionCounter">
                 @for(i <- 0 until remainingActions) {
                     *
@@ -73,15 +74,15 @@
                 </h1>
                 <div id="statContainer">
                     <div id="status">
-                        <h1>Status</h1>
-                        <p>My Field: @actualField</p>
-                        <p>LP: @lifePoints</p>
-                        <p>Strength: @strength</p>
-                        <p>Armor: @armor</p>
-                        <p>Equiped Weapon: @equipedWeapon</p>
+                        <h1 class="centered">Status</h1>
+                        <p class="centered">My Field: @actualField</p>
+                        <p class="centered">LP: @lifePoints</p>
+                        <p class="centered">Strength: @strength</p>
+                        <p class="centered">Armor: @armor</p>
+                        <p class="centered">Equiped Weapon: @equipedWeapon</p>
                     </div>
                     <div id="inventory">
-                        <h1>Equipment:</h1>
+                        <h1 class="centered">Equipment</h1>
 
                         <table>
                             <tr>
@@ -100,11 +101,11 @@
                             </tr>
                         </table>
                         @if(inventory.length == 0) {
-                            <p>Inventory is empty.</p>
+                            <p class="centered">Inventory is empty.</p>
                         }
                     </div>
                 </div>
-                <h1>Zombies:</h1>
+                <h1 class="centered">Zombies</h1>
                 <ul>
                 @for(i <- 0 until zombies.length) {
                     <li>@zombies.apply(i).name:
