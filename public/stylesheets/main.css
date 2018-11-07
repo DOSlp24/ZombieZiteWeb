@@ -6,7 +6,7 @@
     font-size: 2em;
 }
 
-#container {
+#mainContainer {
     height: 100%;
     width: 100%;
     display: flex;
@@ -87,6 +87,36 @@
 
 .centered {
     text-align: center;
+}
+
+.bordered {
+    border-color: black;
+    border-style: solid;
+    border-width: medium;
+}
+
+.borderedRight {
+    border-right: 1px black solid;
+}
+
+.borderedLeft {
+    border-left: 1px black solid;
+}
+
+.borderedBottom {
+    border-bottom: 1px black solid;
+}
+
+.waitButton {
+    icon: url("../images/zombies/Default.png");
+}
+
+.smallMarginBottom {
+    margin-bottom: 5%;
+}
+
+.bigMarginBottom {
+    margin-bottom: 15%;
 }
 
 table {
