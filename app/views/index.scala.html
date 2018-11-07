@@ -1,137 +1,150 @@
 @(controller: de.htwg.se.zombiezite.controller.ControllerInterface)
 
-    @playerCount = @{
-        controller.playerCount
-    }
+@playerCount = @{
+    controller.playerCount
+}
 
-    @playerNames = @{
-        controller.playerNamer
-    }
+@playerNames = @{
+    controller.playerNamer
+}
 
-    @playerSize = @{
-        controller.playerNamer.length
-    }
+@playerSize = @{
+    controller.playerNamer.length
+}
 
-    @actualPlayer = @{
-        controller.actualPlayer.name
-    }
+@actualPlayer = @{
+    controller.actualPlayer.name
+}
 
-    @equipedWeapon = @{
-        controller.actualPlayer.equippedWeapon.name
-    }
+@equipedWeapon = @{
+    controller.actualPlayer.equippedWeapon.name
+}
 
-    @actualField = @{
-        (controller.actualPlayer.actualField.p.x, controller.actualPlayer.actualField.p.y)
-    }
+@actualField = @{
+    (controller.actualPlayer.actualField.p.x, controller.actualPlayer.actualField.p.y)
+}
 
-    @lifePoints = @{
-        controller.actualPlayer.lifePoints
-    }
+@lifePoints = @{
+    controller.actualPlayer.lifePoints
+}
 
-    @strength = @{
-        controller.actualPlayer.strength
-    }
+@strength = @{
+    controller.actualPlayer.strength
+}
 
-    @armor = @{
-        controller.actualPlayer.armor
-    }
+@armor = @{
+    controller.actualPlayer.armor
+}
 
-    @remainingActions = @{
-        controller.actualPlayer.actionCounter
-    }
+@remainingActions = @{
+    controller.actualPlayer.actionCounter
+}
 
-    @inventory = @{
-        controller.actualPlayer.equipment
-    }
+@inventory = @{
+    controller.actualPlayer.equipment
+}
 
-    @zombies = @{
-        controller.zombies
-    }
+@zombies = @{
+    controller.zombies
+}
 
-    @feld = @{
-        controller.area
-    }
+@feld = @{
+    controller.area
+}
 
-    @main("Welcome to the Zombie Pit!") {
-        <head>
-            <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
-        </head>
-        <h1 id="title" class="title">Welcome to the Game!</h1>
-        <h2 id="subtitle" class="title">@playerCount Players entered the Zombie Pit:</h2>
-        <div id="container">
-            <div id="nonarea">
-                @for(i <- 0 until playerCount) {
-                    @if(playerNames.apply(i) == actualPlayer) {
-                        <p id="actualPlayer" class="centered">> @playerNames.apply(i)</p>
-                    } else {
-                        <p class="centered">@playerNames.apply(i)</p>
-                    }
+@main("Welcome to the Zombie Pit!") {
+    <head>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+    </head>
+    <h1 id="title" class="title">Welcome to the Game!</h1>
+    <h2 id="subtitle" class="title">@playerCount Players entered the Zombie Pit:</h2>
+    <div id="container">
+        <div id="nonarea">
+            @if(actualPlayer == "F. Maiar") {
+                <img src="@routes.Assets.versioned("images/players/F. Maiar Por.png")">
+            }
+            @if(actualPlayer == "H. Kaiba") {
+                <img src="@routes.Assets.versioned("images/players/H. Kaiba Por.png")">
+            }
+            @if(actualPlayer == "K. Kawaguchi") {
+                <img src="@routes.Assets.versioned("images/players/K. Kawaguchi Por.png")">
+            }
+            @if(actualPlayer == "P. B. Rainbow") {
+                <img src="@routes.Assets.versioned("images/players/P. B. Rainbow Por.png")">
+            }
+
+            @for(i <- 0 until playerCount) {
+                @if(playerNames.apply(i) == actualPlayer) {
+                    <p id="actualPlayer" class="centered">> @playerNames.apply(i)</p>
+                } else {
+                    <p class="centered">@playerNames.apply(i)</p>
                 }
-                <h1 id="actionCounter">
-                @for(i <- 0 until remainingActions) {
-                    *
-                }
-                </h1>
-                <div id="statContainer">
-                    <div id="status">
-                        <h1 class="centered">Status</h1>
-                        <p class="centered">My Field: @actualField</p>
-                        <p class="centered">LP: @lifePoints</p>
-                        <p class="centered">Strength: @strength</p>
-                        <p class="centered">Armor: @armor</p>
-                        <p class="centered">Equiped Weapon: @equipedWeapon</p>
-                    </div>
-                    <div id="inventory">
-                        <h1 class="centered">Equipment</h1>
-
-                        <table>
-                            <tr>
-                            @for(z <- 0 until 3) {
-                                @if(inventory.length > z) {
-                                    <td class="field">@inventory.apply(z).name</td>
-                                }
-                            }
-                            </tr>
-                            <tr>
-                            @for(z <- 3 until 6) {
-                                @if(inventory.length > z) {
-                                    <td class="field">@inventory.apply(z).name</td>
-                                }
-                            }
-                            </tr>
-                        </table>
-                        @if(inventory.length == 0) {
-                            <p class="centered">Inventory is empty.</p>
-                        }
-                    </div>
+            }
+            <h1 id="actionCounter">
+            @for(i <- 0 until remainingActions) {
+                *
+            }
+            </h1>
+            <div id="statContainer">
+                <div id="status">
+                    <h1 class="centered">Status</h1>
+                    <p class="centered">My Field: @actualField</p>
+                    <p class="centered">LP: @lifePoints</p>
+                    <p class="centered">Strength: @strength</p>
+                    <p class="centered">Armor: @armor</p>
+                    <p class="centered">Equiped Weapon: @equipedWeapon</p>
                 </div>
-                <h1 class="centered">Zombies</h1>
-                <ul>
-                @for(i <- 0 until zombies.length) {
-                    <li>@zombies.apply(i).name:
-                        (@zombies.apply(i).actualField.p.x,@zombies.apply(i).actualField.p.y)
-                        @zombies.apply(i).lifePoints LP</li>
-                }
-                </ul>
-            </div>
-            <div id="area">
-                <table>
-                @for(x <- 0 until feld.laenge) {
-                    <tr>
-                    @for(y <- 0 until feld.breite) {
-                        @if(feld.line(x)(y).chars.length != 0) {
-                            <td class="field">
-                            @for(z <- 0 until feld.line(x)(y).chars.length) {
-                                @feld.line(x)(y).chars.apply(z).name
+                <div id="inventory">
+                    <h1 class="centered">Equipment</h1>
+
+                    <table>
+                        <tr>
+                        @for(z <- 0 until 3) {
+                            @if(inventory.length > z) {
+                                <td class="field">@inventory.apply(z).name</td>
                             }
-                            </td>
-                        } else {
-                            <td class="field">-</td>
                         }
+                        </tr>
+                        <tr>
+                        @for(z <- 3 until 6) {
+                            @if(inventory.length > z) {
+                                <td class="field">@inventory.apply(z).name</td>
+                            }
+                        }
+                        </tr>
+                    </table>
+                    @if(inventory.isEmpty) {
+                        <p class="centered">Inventory is empty.</p>
                     }
-                    </tr>
-                }
-                </table>
+                </div>
             </div>
+            <h1 class="centered">Zombies</h1>
+            <ul>
+            @for(i <- zombies.indices) {
+                <li>@zombies.apply(i).name:
+                    (@zombies.apply(i).actualField.p.x,@zombies.apply(i).actualField.p.y)
+                    @zombies.apply(i).lifePoints LP</li>
+            }
+            </ul>
         </div>
-    }
+        <div id="area">
+            <table>
+            @for(y <- 0 until feld.laenge) {
+                <tr>
+                @for(x <- 0 until feld.breite) {
+                    @if(feld.line(x)(y).chars.nonEmpty) {
+                        <td class="field">
+                        @for(z <- feld.line(x)(y).chars.indices) {
+                            @feld.line(x)(y).chars.apply(z).name
+                        }
+                        </td>
+                    } else {
+                        <td class="field">-</td>
+                    }
+                }
+                </tr>
+            }
+            </table>
+        </div>
+    </div>
+}

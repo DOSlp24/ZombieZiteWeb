@@ -1,9 +1,8 @@
 package controllers
 
-import javax.inject._
-
 import de.htwg.se.zombiezite
 import de.htwg.se.zombiezite.ZombieZiteApp
+import javax.inject._
 import play.api.mvc._
 
 
@@ -39,8 +38,13 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.index(c))
   }
 
-  def callMove(x: Int, y: Int) = Action { implicit request: Request[AnyContent] =>
-    c.move(c.actualPlayer, x, y)
+  def callMove(direction: String) = Action { implicit request: Request[AnyContent] =>
+    direction match {
+      case "up" => c.move(c.actualPlayer, 0, -1)
+      case "down" => c.move(c.actualPlayer, 0, 1)
+      case "left" => c.move(c.actualPlayer, -1, 0)
+      case "right" => c.move(c.actualPlayer, 1, 0)
+    }
     Ok(views.html.index(c))
   }
 }
