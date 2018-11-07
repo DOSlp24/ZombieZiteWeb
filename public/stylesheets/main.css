@@ -79,8 +79,8 @@
     border-color: coral;
     border-style: ridge;
     border-width: medium;
-    width: 100px;
-    height: 100px;
+    width: 105px;
+    height: 105px;
     text-align: center;
     margin: 0px;
 }
@@ -117,6 +117,22 @@
 
 .bigMarginBottom {
     margin-bottom: 15%;
+}
+
+.testContainer {
+    font-size: 0; /*fix inline gaps*/
+    height: 100%;
+    margin: 0%;
+}
+
+.item {
+    font-size: 16px; /*reset font size*/
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    height: 50%;
+    position: relative;
+    overflow: auto; /*for scrollbar*/
 }
 
 table {
