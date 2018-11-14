@@ -150,23 +150,130 @@
                 </div>
                 <div id="inventory">
                     <h1 class="centered">Equipment</h1>
+                    <div class="container">
+                        <div class="row centered smallMarginBottom">
+                            <div class="col inventoryItem">
+                                @equipedWeapon match {
+                                    case "Axe" => {
+                                        <img src="@routes.Assets.versioned("images/weapons/Axe.png")"/>
+                                    }
+                                    case "Big Mama" => {
+                                        <img src="@routes.Assets.versioned("images/weapons/Big Mama.png")"/>
+                                    }
+                                    case "EVIL SISTERS" => {
+                                        <img src="@routes.Assets.versioned("images/weapons/EVIL SISTERS.png")"/>
+                                    }
+                                    case "Fist" => {
+                                        <img src="@routes.Assets.versioned("images/weapons/Fists.png")"/>
+                                    }
+                                    case "Flame Thrower" => {
+                                        <img src="@routes.Assets.versioned("images/weapons/Flame Thrower.png")"/>
+                                    }
+                                    case "Knife" => {
+                                        <img src="@routes.Assets.versioned("images/weapons/Knife.png")"/>
+                                    }
+                                    case "Mashine Gun" => {
+                                        <img src="@routes.Assets.versioned("images/weapons/Mashine Gun.png")"/>
+                                    }
+                                    case "Pan" => {
+                                        <img src="@routes.Assets.versioned("images/weapons/Pan.png")"/>
+                                    }
+                                    case "Pistol" => {
+                                        <img src="@routes.Assets.versioned("images/weapons/Pistol.png")"/>
+                                    }
+                                    case "Shotgun" => {
+                                        <img src="@routes.Assets.versioned("images/weapons/Shotgun.png")"/>
+                                    }
+                                    case "Sniper" => {
+                                        <img src="@routes.Assets.versioned("images/weapons/Sniper.png")"/>
+                                    }
+                                    case _ => {
+                                        <img src="@routes.Assets.versioned("images/weapons/Default.png")"/>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="row">
+                        @for(z <- 0 until inventory.length) {
+                            <div class="col">
+                            @inventory.apply(z).name match {
+                                case "Axe" => {
+                                    <img src="@routes.Assets.versioned("images/items/Axe.png")"/>
+                                }
+                                case "Big Mama" => {
+                                    <img src="@routes.Assets.versioned("images/items/Big Mama.png")"/>
+                                }
+                                case "Boots" => {
+                                    <img src="@routes.Assets.versioned("images/items/Boots.png")"/>
+                                }
+                                case "Bottle" => {
+                                    <img src="@routes.Assets.versioned("images/items/Bottle.png")"/>
+                                }
+                                case "Canned Food" => {
+                                    <img src="@routes.Assets.versioned("images/items/Canned Food.png")"/>
+                                }
+                                case "Chest" => {
+                                    <img src="@routes.Assets.versioned("images/items/Chest.png")"/>
+                                }
+                                case "EVIL SISTERS" => {
+                                    <img src="@routes.Assets.versioned("images/items/Evil Sisters.png")"/>
+                                }
+                                case "Flame Thrower" => {
+                                    <img src="@routes.Assets.versioned("images/items/Flame Thrower.png")"/>
+                                }
+                                case "Healkit" => {
+                                    <img src="@routes.Assets.versioned("images/items/Healkit.png")"/>
+                                }
+                                case "Holy Armor" => {
+                                    <img src="@routes.Assets.versioned("images/items/Holy Armor.png")"/>
+                                }
+                                case "Knife" => {
+                                    <img src="@routes.Assets.versioned("images/items/Knife.png")"/>
+                                }
+                                case "Mashine Gun" => {
+                                    <img src="@routes.Assets.versioned("images/items/Machine Gun.png")"/>
+                                }
+                                case "Money" => {
+                                    <img src="@routes.Assets.versioned("images/items/Money.png")"/>
+                                }
+                                case "Pan" => {
+                                    <img src="@routes.Assets.versioned("images/items/Pan.png")"/>
+                                }
+                                case "Pistol" => {
+                                    <img src="@routes.Assets.versioned("images/items/Pistol.png")"/>
+                                }
+                                case "Rice" => {
+                                    <img src="@routes.Assets.versioned("images/items/Rice.png")"/>
+                                }
+                                case "Shotgun" => {
+                                    <img src="@routes.Assets.versioned("images/items/Shotgun.png")"/>
+                                }
+                                case "Sniper" => {
+                                    <img src="@routes.Assets.versioned("images/items/Sniper.png")"/>
+                                }
+                                case "Stone" => {
+                                    <img src="@routes.Assets.versioned("images/items/Stone.png")"/>
+                                }
+                                case "Swat-Shield" => {
+                                    <img src="@routes.Assets.versioned("images/items/Swat-Shield.png")"/>
+                                }
+                                case "Trash" => {
+                                    <img src="@routes.Assets.versioned("images/items/Trash.png")"/>
+                                }
+                                case "Water" => {
+                                    <img src="@routes.Assets.versioned("images/items/Water.png")"/>
+                                }
+                                case _ => {
+                                    <img src="@routes.Assets.versioned("images/items/Empty.png")"/>
+                                }
+                            }
+                            </div>
 
-                    <table>
-                        <tr>
-                        @for(z <- 0 until 3) {
-                            @if(inventory.length > z) {
-                                <td class="field">@inventory.apply(z).name</td>
-                            }
                         }
-                        </tr>
-                        <tr>
-                        @for(z <- 3 until 6) {
-                            @if(inventory.length > z) {
-                                <td class="field">@inventory.apply(z).name</td>
-                            }
-                        }
-                        </tr>
-                    </table>
+                        </div>
+                    </div>
+
+
                     @if(inventory.isEmpty) {
                         <p class="centered">Inventory is empty.</p>
                     }
@@ -188,7 +295,7 @@
                 @for(x <- 0 until feld.breite) {
                     @if(feld.line(x)(y).chars.nonEmpty) {
                         @if(feld.line(x)(y).chars.length > 4) {
-                            <td class="field">4 Chars</td>
+                            <td class="field">>4 Chars</td>
                         } else {
                             <td class="testContainer field" align="left">
                             @for(c <- feld.line(x)(y).chars.indices) {
