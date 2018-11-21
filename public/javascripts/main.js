@@ -1,8 +1,28 @@
+$(document).ready(function () {
+    console.log("Document is ready!");
+    $(".inventoryItem").click(function () {
+        sayHello()
+    });
+    $("#equippedWeapon").draggable();
+    $("#equippedWeapon").droppable();
+    //loadJson();
+});
+
 function sayHello() {
     console.log("Hello whoever you are!");
 }
-$( document ).ready(function() {
-    console.log( "Document is ready!" );
-    $(".inventoryItem").click(function() {sayHello()});
-    $("#equippedWeapon").draggable();
-});
+
+function loadJson() {
+    $.ajax({
+        method: "GET",
+        url: "/json",
+        dataType: "json",
+
+        success: function (result) {
+            grid = new Grid(result.grid.size);
+            grid.fill(result.grid.cells);
+            updateGrid(grid);
+            registerClickListener();
+        }
+    });
+}

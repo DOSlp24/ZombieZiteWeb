@@ -47,5 +47,9 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     }
     Ok(views.html.ZombieZite(c))
   }
+
+  /*def getJson() = Action {
+    Ok()
+  }*/
 }
 
