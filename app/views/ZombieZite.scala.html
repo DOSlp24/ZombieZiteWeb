@@ -302,9 +302,9 @@
                         <!--Main Field Build Up - Attackable-->
                         @if(feld.line(x)(y).chars.nonEmpty) {
                             @if(feld.line(x)(y).chars.length > 4) {
-                                <td id="Field(@x,@y)" class="attackableField">>4 Chars</td>
+                                <td id="@x,@y" class="attackableField">>4 Chars</td>
                             } else {
-                                <td id="Field(@x,@y)" class="testContainer attackableField" align="left">
+                                <td id="@x,@y" class="testContainer attackableField" align="left">
                                 @for(c <- feld.line(x)(y).chars.indices) {
                                     @feld.line(x)(y).chars.apply(c).name match {
                                         case "Fatti" => {

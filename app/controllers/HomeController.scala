@@ -47,6 +47,14 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.ZombieZite(c))
   }
 
+  def attackField(coord: String) = Action { implicit request: Request[AnyContent] =>
+    val coordinate = coord.split(",")
+    val x = Integer.parseInt(coordinate.apply(0).trim())
+    val y = Integer.parseInt(coordinate.apply(1).trim())
+    c.attackField(c.actualPlayer, c.area.line(x)(y))
+    Ok(views.html.ZombieZite(c))
+  }
+
   /*def getJson() = Action {
     Ok()
   }*/

@@ -11,7 +11,8 @@ GET        /new/*num                controllers.HomeController.newGame(num)
 # Communication
 GET        /wait                    controllers.HomeController.callWait
 GET        /search                  controllers.HomeController.callSearch
-GET        /move/*direction       controllers.HomeController.callMove(direction: String)
+GET        /move/*direction         controllers.HomeController.callMove(direction: String)
+GET        /attackField/*coord      controllers.HomeController.attackField(coord: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file            controllers.Assets.versioned(path="/public", file: Asset)

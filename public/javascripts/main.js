@@ -8,6 +8,7 @@ $(document).ready(function () {
     $(".attackableField").click((function (e) {
         sayHello()
         console.log(e.currentTarget.id)
+        document.location.href = "/attackField/" + e.currentTarget.id
     }));
     //loadJson();
 });
