@@ -85,6 +85,17 @@
     margin: 0px;
 }
 
+.attackableField {
+    border-color: #721c24;
+    background-color: #c82333;
+    border-style: ridge;
+    border-width: medium;
+    width: 105px;
+    height: 105px;
+    text-align: center;
+    margin: 0px;
+}
+
 .centered {
     text-align: center;
 }

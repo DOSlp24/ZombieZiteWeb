@@ -64,7 +64,11 @@
     controller.area
 }
 
-@index(controller) {
+@attackableFields = @{
+    controller.attackableFields(controller.actualPlayer)
+}
+
+@main("Welcome to the Zombie Pit!") {
 
     <div id="mainContainer">
         <div id="nonPlayground">
@@ -293,49 +297,99 @@
             @for(y <- 0 until feld.laenge) {
                 <tr>
                 @for(x <- 0 until feld.breite) {
-                    @if(feld.line(x)(y).chars.nonEmpty) {
-                        @if(feld.line(x)(y).chars.length > 4) {
-                            <td class="field">>4 Chars</td>
-                        } else {
-                            <td class="testContainer field" align="left">
-                            @for(c <- feld.line(x)(y).chars.indices) {
-                                @feld.line(x)(y).chars.apply(c).name match {
-                                    case "Fatti" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Fatti.png")"/></div>
-                                    }
-                                    case "Runner" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Runner.png")"/></div>
-                                    }
-                                    case "Schlurfer" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Schlurfer.png")"/></div>
-                                    }
-                                    case "Spitter" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Spitter.png")"/></div>
-                                    }
-                                    case "Tank" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Tank.png")"/></div>
-                                    }
-                                    case "F. Maiar" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/players/F. Maiar.png")"/></div>
-                                    }
-                                    case "H. Kaiba" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/players/H. Kaiba.png")"/></div>
-                                    }
-                                    case "K. Kawaguchi" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/players/K. Kawaguchi.png")"/></div>
-                                    }
-                                    case "P. B. Rainbow" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/players/P. B. Rainbow.png")"/></div>
-                                    }
-                                    case _ => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Default.png")"/></div>
+                    @if(attackableFields.contains(feld.line(x)(y))) {
+
+                        <!--Main Field Build Up - Attackable-->
+                        @if(feld.line(x)(y).chars.nonEmpty) {
+                            @if(feld.line(x)(y).chars.length > 4) {
+                                <td id="Field(@x,@y)" class="attackableField">>4 Chars</td>
+                            } else {
+                                <td id="Field(@x,@y)" class="testContainer attackableField" align="left">
+                                @for(c <- feld.line(x)(y).chars.indices) {
+                                    @feld.line(x)(y).chars.apply(c).name match {
+                                        case "Fatti" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/zombies/Fatti.png")"/></div>
+                                        }
+                                        case "Runner" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/zombies/Runner.png")"/></div>
+                                        }
+                                        case "Schlurfer" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/zombies/Schlurfer.png")"/></div>
+                                        }
+                                        case "Spitter" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/zombies/Spitter.png")"/></div>
+                                        }
+                                        case "Tank" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/zombies/Tank.png")"/></div>
+                                        }
+                                        case "F. Maiar" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/players/F. Maiar.png")"/></div>
+                                        }
+                                        case "H. Kaiba" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/players/H. Kaiba.png")"/></div>
+                                        }
+                                        case "K. Kawaguchi" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/players/K. Kawaguchi.png")"/></div>
+                                        }
+                                        case "P. B. Rainbow" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/players/P. B. Rainbow.png")"/></div>
+                                        }
+                                        case _ => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/zombies/Default.png")"/></div>
+                                        }
                                     }
                                 }
+                                </td>
                             }
-                            </td>
+                        } else {
+                            <td class="attackableField">-</td>
                         }
+                            <!--Same Thing again - but not attackable-->
                     } else {
-                        <td class="field">-</td>
+                        @if(feld.line(x)(y).chars.nonEmpty) {
+                            @if(feld.line(x)(y).chars.length > 4) {
+                                <td class="field">>4 Chars</td>
+                            } else {
+                                <td class="testContainer field" align="left">
+                                @for(c <- feld.line(x)(y).chars.indices) {
+                                    @feld.line(x)(y).chars.apply(c).name match {
+                                        case "Fatti" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/zombies/Fatti.png")"/></div>
+                                        }
+                                        case "Runner" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/zombies/Runner.png")"/></div>
+                                        }
+                                        case "Schlurfer" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/zombies/Schlurfer.png")"/></div>
+                                        }
+                                        case "Spitter" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/zombies/Spitter.png")"/></div>
+                                        }
+                                        case "Tank" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/zombies/Tank.png")"/></div>
+                                        }
+                                        case "F. Maiar" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/players/F. Maiar.png")"/></div>
+                                        }
+                                        case "H. Kaiba" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/players/H. Kaiba.png")"/></div>
+                                        }
+                                        case "K. Kawaguchi" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/players/K. Kawaguchi.png")"/></div>
+                                        }
+                                        case "P. B. Rainbow" => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/players/P. B. Rainbow.png")"/></div>
+                                        }
+                                        case _ => {
+                                            <div class="item"><img src="@routes.Assets.versioned("images/zombies/Default.png")"/></div>
+                                        }
+                                    }
+                                }
+                                </td>
+                            }
+                        } else {
+                            <td class="field">-</td>
+                        }
                     }
                 }
                 </tr>

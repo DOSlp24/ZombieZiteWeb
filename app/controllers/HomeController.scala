@@ -19,8 +19,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def index() = Action { implicit request: Request[AnyContent] =>
-    c.init(4)
-    Ok(views.html.ZombieZite(c))
+    Ok(views.html.index())
   }
 
   def newGame(num: String) = Action { implicit request: Request[AnyContent] =>

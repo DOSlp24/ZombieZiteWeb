@@ -1,19 +1,7 @@
-@(controller: de.htwg.se.zombiezite.controller.ControllerInterface)(content: Html)
+@()
 
-
-@playerCount = @{
-    controller.playerCount
-}
 
 @main("Welcome to the Zombie Pit!") {
 
     <h1 id="title" class="title">Welcome to the Game!</h1>
-    @if(playerCount == 1) {
-        <h2 id="subtitle" class="title">@playerCount Player entered the Zombie Pit.</h2>
-    } else {
-        <h2 id="subtitle" class="title">@playerCount Players entered the Zombie Pit.</h2>
-    }
-
-    @content
-
 }

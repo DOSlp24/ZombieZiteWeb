@@ -5,6 +5,10 @@ $(document).ready(function () {
     });
     $("#equippedWeapon").draggable();
     $("#equippedWeapon").droppable();
+    $(".attackableField").click((function (e) {
+        sayHello()
+        console.log(e.currentTarget.id)
+    }));
     //loadJson();
 });
 
