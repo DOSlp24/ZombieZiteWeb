@@ -149,3 +149,32 @@
 table {
     height: 100%;
 }
+
+
+/* Responsive stuff. Rearrange if necessary */
+/* When the width is not above 1850px - small screen */
+@media screen and (max-width: 925px) {
+    div.col-sm-3 {
+
+        background: red;
+    }
+}
+
+/* When the width is above 1850px - normal screen */
+@media screen and (min-width: 926px) and (max-width: 1850px) {
+    div.col-sm-3 {
+
+        background: yellow;
+    }
+}
+
+/* When the width is above 1850px - big screen */
+@media screen and (min-width: 1851px) {
+    div.col-sm-3 {
+
+        background: green;
+    }
+}
+
+
+
