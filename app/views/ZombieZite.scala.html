@@ -91,7 +91,7 @@
                         @if(playerNames.apply(i) == actualPlayer) {
                             <p id="actualPlayer" class="centered">>@playerNames.apply(i)</p>
                         } else {
-                            <p class="centered">@playerNames.apply(i)</p>
+                            <p id="notActualPlayer" class="centered">@playerNames.apply(i)</p>
                         }
                     }
                     <h1 id="actionCounter">
@@ -104,35 +104,35 @@
                     <div class="text-info">Runde @roundNumber</div>
                     <div class="text-info">@zombiesKilled/@killsNeeded Zombies erledigt.</div>
                 </div>
-                <div class="col-sm-6 borderedRight borderedBottom" align="center">
+                <div class="col-sm-6 borderedRight borderedBottom buttonScale" align="center">
                     <div class="row justify-content-center smallMarginBottom">
                         <a class="btn btn-dark" href="/move/up">
-                            <img src="@routes.Assets.versioned("images/icons/Up.png")" width="auto" height="auto"/>
+                            <img class="buttonScale" src="@routes.Assets.versioned("images/icons/Up.png")"/>
                         </a>
                     </div>
                     <div class="row justify-content-center bigMarginBottom">
                         <a class="btn btn-dark" href="/move/left">
-                            <img src="@routes.Assets.versioned("images/icons/Left.png")" width="auto" height="auto"/>
+                            <img class="buttonScale" src="@routes.Assets.versioned("images/icons/Left.png")"/>
                         </a>
                         <a class="btn btn-dark" href="/move/down">
-                            <img src="@routes.Assets.versioned("images/icons/Down.png")" width="auto" height="auto"/>
+                            <img class="buttonScale" src="@routes.Assets.versioned("images/icons/Down.png")"/>
 
                         </a>
                         <a class="btn btn-dark" href="/move/right">
-                            <img src="@routes.Assets.versioned("images/icons/Right.png")" width="auto" height="auto"/>
+                            <img class="buttonScale" class="buttonScale" src="@routes.Assets.versioned("images/icons/Right.png")"/>
                         </a>
                     </div>
                     <div class="row justify-content-center">
                         <a class="btn btn-success" href="/search">
-                            <img src="@routes.Assets.versioned("images/icons/Search.png")" width="auto" height="auto"/>
+                            <img class="buttonScale" src="@routes.Assets.versioned("images/icons/Search.png")" />
                             Search
                         </a>
                         <a class="btn btn-primary" href="/wait">
-                            <img src="@routes.Assets.versioned("images/icons/Wait.png")" width="auto" height="auto"/>
+                            <img class="buttonScale" src="@routes.Assets.versioned("images/icons/Wait.png")"/>
                             Wait
                         </a>
                         <a class="btn btn-danger" href="#">
-                            <img src="@routes.Assets.versioned("images/icons/Attack.png")" width="auto" height="auto"/>
+                            <img class="buttonScale" src="@routes.Assets.versioned("images/icons/Attack.png")"/>
                             Attack
                         </a>
                     </div>
@@ -141,7 +141,7 @@
 
             <div id="statContainer">
                 <div id="status">
-                    <h1 class="centered">Status</h1>
+                    <h1 class="centered headline">Status</h1>
                     <p class="centered">My Field: @actualField</p>
                     <p class="centered">LP: @lifePoints</p>
                     <p class="centered">Strength: @strength</p>
@@ -149,7 +149,7 @@
                     <p class="centered">Equiped Weapon: @equipedWeapon</p>
                 </div>
                 <div id="inventory">
-                    <h1 class="centered">Equipment</h1>
+                    <h1 class="centered headline">Equipment</h1>
                     <div class="container">
                         <div class="row centered smallMarginBottom">
                             <div class="col inventoryItem" id="equippedWeapon">
@@ -281,7 +281,7 @@
             </div>
 
             <div id="zombieContainer">
-                <h1 class="centered">Zombies</h1>
+                <h1 class="centered headline">Zombies</h1>
                 <ul>
                 @for(i <- zombies.indices) {
                     <li>@zombies.apply(i).name:
