@@ -4,19 +4,21 @@
 # ~~~~
 
 # Viewing
-GET        /                        controllers.HomeController.index
-GET        /about                   controllers.HomeController.about
-GET        /playground              controllers.HomeController.showPlayground
-GET        /new/*num                controllers.HomeController.newGame(num)
+GET        /                          controllers.HomeController.index
+GET        /about                     controllers.HomeController.about
+GET        /playground                controllers.HomeController.showPlayground
+GET        /new/*num                  controllers.HomeController.newGame(num)
 
 # Communication
-GET        /wait                    controllers.HomeController.callWait
-GET        /search                  controllers.HomeController.callSearch
-GET        /move/*direction         controllers.HomeController.callMove(direction: String)
-GET        /attackField/*coord      controllers.HomeController.attackField(coord: String)
+GET        /wait                      controllers.HomeController.callWait
+GET        /search                    controllers.HomeController.callSearch
+GET        /move/*direction           controllers.HomeController.callMove(direction: String)
+GET        /attackField/*coord        controllers.HomeController.attackField(coord: String)
 
+GET        /equipArmor/*index         controllers.HomeController.equipArmor(index: String)
+GET        /equipWeapon/*index         controllers.HomeController.equipWeapon(index: String)
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file            controllers.Assets.versioned(path="/public", file: Asset)
+GET        /assets/*file              controllers.Assets.versioned(path="/public", file: Asset)
 
 # Ajax Stuff
 #GET        /json                    controllers.HomeController.getJson

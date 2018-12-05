@@ -2,8 +2,11 @@ package controllers
 
 import de.htwg.se.zombiezite
 import de.htwg.se.zombiezite.ZombieZiteApp
+import de.htwg.se.zombiezite.model.{ArmorInterface, Item, WeaponInterface, baseImpl}
+import de.htwg.se.zombiezite.model.baseImpl.Armor
 import javax.inject._
 import play.api.mvc._
+import play.api.libs.json._
 
 
 /**
@@ -14,7 +17,10 @@ import play.api.mvc._
 class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   val c: zombiezite.controller.ControllerInterface = ZombieZiteApp.getController()
 
+
   def about() = Action { implicit request: Request[AnyContent] =>
+    c.init(4)
+    println(c.attackableFields(c.actualPlayer).apply(0).players)
     Ok(views.html.About())
   }
 
@@ -56,6 +62,20 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     val x = Integer.parseInt(coordinate.apply(0).trim())
     val y = Integer.parseInt(coordinate.apply(1).trim())
     c.attackField(c.actualPlayer, c.area.line(x)(y))
+    Ok(views.html.ZombieZite(c))
+  }
+
+  def equipArmor(invPosition: String) = Action { implicit request: Request[AnyContent] =>
+    val itemIndex = Integer.parseInt(invPosition)
+    val item:ArmorInterface = c.actualPlayer.equipment.apply(itemIndex).asInstanceOf[ArmorInterface]
+    c.equipArmor(c.actualPlayer, item)
+    Ok(views.html.ZombieZite(c))
+  }
+
+  def equipWeapon(invPosition: String) = Action { implicit request: Request[AnyContent] =>
+    val itemIndex = Integer.parseInt(invPosition)
+    val item:WeaponInterface = c.actualPlayer.equipment.apply(itemIndex).asInstanceOf[WeaponInterface]
+    c.beweapon(c.actualPlayer, item)
     Ok(views.html.ZombieZite(c))
   }
 

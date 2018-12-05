@@ -4,7 +4,23 @@ $(document).ready(function () {
         sayHello()
     });
     $("#equippedWeapon").draggable();
-    $("#equippedWeapon").droppable();
+    $("#equippedWeapon").droppable({
+        drop: function (e, ui) {
+            console.log(ui.draggable[0].id);
+            console.log(ui.draggable[0].id.split(":")[1]);
+            console.log("Is Weapon:" + ui.draggable[0].classList.contains("inventoryWeapon"));
+
+            var index = ui.draggable[0].id.split(":")[1];
+            if (ui.draggable[0].classList.contains("inventoryWeapon")) {
+                document.location.href = "/equipWeapon/" + index;
+            } else if (ui.draggable[0].classList.contains("inventoryArmor")) {
+                document.location.href = "/equipArmor/" + index;
+            } else {
+
+            }
+        }
+    });
+    $(".inventoryItem").draggable();
     $(".attackableField").click((function (e) {
         sayHello()
         console.log(e.currentTarget.id)
