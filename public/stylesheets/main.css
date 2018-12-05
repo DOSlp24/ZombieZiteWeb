@@ -143,6 +143,11 @@
     margin-bottom: 15%;
 }
 
+.myTableBuffer {
+    margin-right: 5%;
+    margin-left: 5%;
+}
+
 .testContainer {
     font-size: 0; /*fix inline gaps*/
     height: 100%;

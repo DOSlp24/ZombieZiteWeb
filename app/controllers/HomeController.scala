@@ -67,15 +67,27 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
   def equipArmor(invPosition: String) = Action { implicit request: Request[AnyContent] =>
     val itemIndex = Integer.parseInt(invPosition)
-    val item:ArmorInterface = c.actualPlayer.equipment.apply(itemIndex).asInstanceOf[ArmorInterface]
+    val item: ArmorInterface = c.actualPlayer.equipment.apply(itemIndex).asInstanceOf[ArmorInterface]
     c.equipArmor(c.actualPlayer, item)
     Ok(views.html.ZombieZite(c))
   }
 
   def equipWeapon(invPosition: String) = Action { implicit request: Request[AnyContent] =>
     val itemIndex = Integer.parseInt(invPosition)
-    val item:WeaponInterface = c.actualPlayer.equipment.apply(itemIndex).asInstanceOf[WeaponInterface]
+    val item: WeaponInterface = c.actualPlayer.equipment.apply(itemIndex).asInstanceOf[WeaponInterface]
     c.beweapon(c.actualPlayer, item)
+    Ok(views.html.ZombieZite(c))
+  }
+
+  def unequipWeapon() = Action { implicit request: Request[AnyContent] =>
+    c.beweapon(c.actualPlayer, null)
+    Ok(views.html.ZombieZite(c))
+  }
+
+  def trashItem(invPosition: String) = Action { implicit request: Request[AnyContent] =>
+    val itemIndex = Integer.parseInt(invPosition)
+    val item: Item = c.actualPlayer.equipment.apply(itemIndex)
+    c.drop(c.actualPlayer, item)
     Ok(views.html.ZombieZite(c))
   }
 

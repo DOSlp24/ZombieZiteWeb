@@ -149,10 +149,19 @@
                     <p class="centered">Equiped Weapon: @equipedWeapon</p>
                 </div>
                 <div id="inventory">
-                    <h1 class="centered headline">Equipment</h1>
+                    <div class="container">
+                        <div class="row centered">
+                            <div class="col">
+                                <h1 class="centered headline">Equipment</h1>
+                            </div>
+                            <div class="col">
+                                <h1 id="inventoryTrash" class="alert-danger">Trash</h1>
+                            </div>
+                        </div>
+                    </div>
                     <div class="container">
                         <div class="row centered smallMarginBottom">
-                            <div class="col inventoryItem" id="equippedWeapon">
+                            <div class="col" id="equippedWeapon">
                             @equipedWeapon match {
                                 case "Axe" => {
                                     <img src="@routes.Assets.versioned("images/weapons/Axe.png")"/>
@@ -299,7 +308,7 @@
                 @for(x <- 0 until feld.breite) {
                     @if(attackableFields.contains(feld.line(x)(y))) {
 
-                        <!--Main Field Build Up - Attackable-->
+                            <!--Main Field Build Up - Attackable-->
                         @if(feld.line(x)(y).chars.nonEmpty) {
                             @if(feld.line(x)(y).chars.length > 4) {
                                 <td id="@x,@y" class="attackableField">>4 Chars</td>
