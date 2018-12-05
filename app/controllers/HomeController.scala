@@ -2,11 +2,12 @@ package controllers
 
 import de.htwg.se.zombiezite
 import de.htwg.se.zombiezite.ZombieZiteApp
-import de.htwg.se.zombiezite.model.{ArmorInterface, Item, WeaponInterface, baseImpl}
-import de.htwg.se.zombiezite.model.baseImpl.Armor
+import de.htwg.se.zombiezite.model._
 import javax.inject._
 import play.api.mvc._
 import play.api.libs.json._
+
+import scala.util.parsing.json.JSONObject
 
 
 /**
@@ -91,8 +92,107 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.ZombieZite(c))
   }
 
-  /*def getJson() = Action {
-    Ok()
-  }*/
+  def getJson() = Action {
+    val playerCount = c.playerCount
+    val actualPlayer = c.actualPlayer
+    val attackableFields = c.attackableFields(actualPlayer)
+    val inv = actualPlayer.equipment
+
+
+    implicit val item = new Writes[Item] {
+
+      def writes(i: Item) = i match {
+        case w: WeaponInterface => Json.obj(
+          "name" -> w.name,
+          "range" -> w.range,
+          "damage" -> w.strength,
+          "aoe" -> w.aoe
+        )
+        case a: ArmorInterface => Json.obj(
+          "name" -> a.name,
+          "armor" -> a.protection
+        )
+        case _ => Json.obj(
+          "name" -> i.name
+        )
+      }
+    }
+
+    implicit val position = new Writes[PositionInterface] {
+      def writes(pos: PositionInterface) = Json.obj(
+        "x" -> pos.x,
+        "y" -> pos.y
+      )
+    }
+
+    // Cross ref -> ActualField to Position
+    implicit val char = new Writes[Character] {
+      def writes(c: Character) = c match {
+        case p: PlayerInterface => Json.obj(
+          "actualPosition" -> p.actualField.p,
+          "lifePoints" -> p.lifePoints,
+          "strength" -> p.strength,
+          "range" -> p.range,
+          "name" -> p.name,
+          "equippedWeapon" -> p.equippedWeapon,
+          "inventory" -> p.equipment,
+          "ActionCounter" -> p.actionCounter
+        )
+        case z: ZombieInterface => Json.obj(
+          "actualPosition" -> z.actualField.p,
+          "lifePoints" -> z.lifePoints,
+          "strength" -> z.strength,
+          "range" -> z.range,
+          "name" -> z.name
+        )
+        case _ => Json.obj(
+          "name" -> c.name
+        )
+      }
+    }
+
+    implicit val field = new Writes[FieldInterface] {
+      def writes(f: FieldInterface) = Json.obj(
+        "position" -> f.p,
+        "players" -> f.players,
+        "zombies" -> f.zombies,
+        "chars" -> f.chars,
+        "charCount" -> Json.toJson(f.chars.length)
+      )
+    }
+
+    implicit val area = new Writes[AreaInterface] {
+      def writes(a: AreaInterface) = Json.obj(
+        "fields" -> a.line
+      )
+    }
+
+    implicit val statWrites = new Writes[GameState] {
+      def writes(s: GameState) = Json.obj(
+        "round" -> s.round,
+        "kills" -> s.kills,
+        "winCount" -> s.winCount,
+        "players" -> s.players
+      )
+    }
+
+    implicit val gameSnapWrites = new Writes[GameSnapshot] {
+      def writes(m: GameSnapshot) = Json.obj(
+        "status" -> m.stat,
+        "area" -> m.area,
+        "actualPlayer" -> m.actualPlayer,
+        "attackableFields" -> m.af
+      )
+    }
+
+
+    val gameState = GameState(c.round, c.zombiesKilled, c.winCount, c.player)
+    val myJson = Json.toJson(GameSnapshot(c.area, c.actualPlayer, gameState, c.attackableFields(c.actualPlayer)))
+    Ok(myJson)
+  }
+
 }
+
+case class GameState(round: Int, kills: Int, winCount: Int, players: Array[PlayerInterface])
+case class GameSnapshot(area: AreaInterface, actualPlayer: PlayerInterface, stat: GameState, af: Array[FieldInterface])
 

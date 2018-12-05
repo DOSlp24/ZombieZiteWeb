@@ -49,7 +49,7 @@ $(document).ready(function () {
         console.log(e.currentTarget.id);
         document.location.href = "/attackField/" + e.currentTarget.id;
     }));
-    //loadJson();
+    loadJson();
 });
 
 function dragover(e) {
@@ -67,10 +67,7 @@ function loadJson() {
         dataType: "json",
 
         success: function (result) {
-            grid = new Grid(result.grid.size);
-            grid.fill(result.grid.cells);
-            updateGrid(grid);
-            registerClickListener();
+            console.log(result);
         }
     });
 }
