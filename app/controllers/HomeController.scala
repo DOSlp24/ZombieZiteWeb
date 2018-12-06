@@ -18,7 +18,6 @@ import scala.util.parsing.json.JSONObject
 class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   val c: zombiezite.controller.ControllerInterface = ZombieZiteApp.getController()
 
-
   def about() = Action { implicit request: Request[AnyContent] =>
     c.init(4)
     println(c.attackableFields(c.actualPlayer).apply(0).players)
@@ -59,7 +58,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def attackField(coord: String) = Action { implicit request: Request[AnyContent] =>
-    val coordinate = coord.split(",")
+    val coordinate = coord.slice(5, coord.length).split("-")
     val x = Integer.parseInt(coordinate.apply(0).trim())
     val y = Integer.parseInt(coordinate.apply(1).trim())
     c.attackField(c.actualPlayer, c.area.line(x)(y))
