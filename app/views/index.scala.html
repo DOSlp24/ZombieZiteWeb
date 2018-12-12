@@ -1,5 +1,17 @@
 @(controller: de.htwg.se.zombiezite.controller.ControllerInterface)
 
+@roundNumber = @{
+    controller.round
+}
+
+@zombiesKilled = @{
+    controller.zombiesKilled
+}
+
+@killsNeeded = @{
+    controller.winCount
+}
+
 @playerCount = @{
     controller.playerCount
 }
@@ -53,38 +65,80 @@
 }
 
 @main("Welcome to the Zombie Pit!") {
-    <head>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
-    </head>
+
     <h1 id="title" class="title">Welcome to the Game!</h1>
     <h2 id="subtitle" class="title">@playerCount Players entered the Zombie Pit:</h2>
-    <div id="container">
+    <div id="mainContainer">
         <div id="nonarea">
-            @if(actualPlayer == "F. Maiar") {
-                <img src="@routes.Assets.versioned("images/players/F. Maiar Por.png")">
-            }
-            @if(actualPlayer == "H. Kaiba") {
-                <img src="@routes.Assets.versioned("images/players/H. Kaiba Por.png")">
-            }
-            @if(actualPlayer == "K. Kawaguchi") {
-                <img src="@routes.Assets.versioned("images/players/K. Kawaguchi Por.png")">
-            }
-            @if(actualPlayer == "P. B. Rainbow") {
-                <img src="@routes.Assets.versioned("images/players/P. B. Rainbow Por.png")">
-            }
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3 borderedRight borderedBottom" align="center">
+                        @if(actualPlayer == "F. Maiar") {
+                            <img src="@routes.Assets.versioned("images/players/F. Maiar Por.png")">
+                        }
+                        @if(actualPlayer == "H. Kaiba") {
+                            <img src="@routes.Assets.versioned("images/players/H. Kaiba Por.png")">
+                        }
+                        @if(actualPlayer == "K. Kawaguchi") {
+                            <img src="@routes.Assets.versioned("images/players/K. Kawaguchi Por.png")">
+                        }
+                        @if(actualPlayer == "P. B. Rainbow") {
+                            <img src="@routes.Assets.versioned("images/players/P. B. Rainbow Por.png")">
+                        }
 
-            @for(i <- 0 until playerCount) {
-                @if(playerNames.apply(i) == actualPlayer) {
-                    <p id="actualPlayer" class="centered">> @playerNames.apply(i)</p>
-                } else {
-                    <p class="centered">@playerNames.apply(i)</p>
-                }
-            }
-            <h1 id="actionCounter">
-            @for(i <- 0 until remainingActions) {
-                *
-            }
-            </h1>
+                        @for(i <- 0 until playerCount) {
+                            @if(playerNames.apply(i) == actualPlayer) {
+                                <p id="actualPlayer" class="centered">>@playerNames.apply(i)</p>
+                            } else {
+                                <p class="centered">@playerNames.apply(i)</p>
+                            }
+                        }
+                        <h1 id="actionCounter">
+                        @for(i <- 0 until remainingActions) {
+                            *
+                        }
+                        </h1>
+                    </div>
+                    <div class="col-sm-3 borderedRight borderedBottom" align="center">
+                        <div class="text-info">Runde @roundNumber</div>
+                        <div class="text-info">@zombiesKilled/@killsNeeded Zombies erledigt.</div>
+                    </div>
+                    <div class="col-sm-6 borderedRight borderedBottom" align="center">
+                        <div class="row justify-content-center smallMarginBottom">
+                            <a class="btn btn-dark" href="/move/up">
+                                <img src="@routes.Assets.versioned("images/icons/Up.png")" width="auto" height="auto"/>
+                            </a>
+                        </div>
+                        <div class="row justify-content-center bigMarginBottom">
+                            <a class="btn btn-dark" href="/move/left">
+                                <img src="@routes.Assets.versioned("images/icons/Left.png")" width="auto" height="auto"/>
+                            </a>
+                            <a class="btn btn-dark" href="/move/down">
+                                <img src="@routes.Assets.versioned("images/icons/Down.png")" width="auto" height="auto"/>
+
+                            </a>
+                            <a class="btn btn-dark" href="/move/right">
+                                <img src="@routes.Assets.versioned("images/icons/Right.png")" width="auto" height="auto"/>
+                            </a>
+                        </div>
+                        <div class="row justify-content-center">
+                            <a class="btn btn-success" href="/search">
+                                <img src="@routes.Assets.versioned("images/icons/Search.png")" width="auto" height="auto"/>
+                                Search
+                            </a>
+                            <a class="btn btn-primary" href="/wait">
+                                <img src="@routes.Assets.versioned("images/icons/Wait.png")" width="auto" height="auto"/>
+                                Wait
+                            </a>
+                            <a class="btn btn-danger" href="#">
+                                <img src="@routes.Assets.versioned("images/icons/Attack.png")" width="auto" height="auto"/>
+                                Attack
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div id="statContainer">
                 <div id="status">
                     <h1 class="centered">Status</h1>
@@ -133,11 +187,46 @@
                 <tr>
                 @for(x <- 0 until feld.breite) {
                     @if(feld.line(x)(y).chars.nonEmpty) {
-                        <td class="field">
-                        @for(z <- feld.line(x)(y).chars.indices) {
-                            @feld.line(x)(y).chars.apply(z).name
+                        @if(feld.line(x)(y).chars.length > 4) {
+                            <td class="field">4 Chars</td>
+                        } else {
+                            <td class="testContainer field" align="left">
+                            @for(c <- feld.line(x)(y).chars.indices) {
+                                @feld.line(x)(y).chars.apply(c).name match {
+                                    case "Fatti" => {
+                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Fatti.png")"/></div>
+                                    }
+                                    case "Runner" => {
+                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Runner.png")"/></div>
+                                    }
+                                    case "Schlurfer" => {
+                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Schlurfer.png")"/></div>
+                                    }
+                                    case "Spitter" => {
+                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Spitter.png")"/></div>
+                                    }
+                                    case "Tank" => {
+                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Tank.png")"/></div>
+                                    }
+                                    case "F. Maiar" => {
+                                        <div class="item"><img src="@routes.Assets.versioned("images/players/F. Maiar.png")"/></div>
+                                    }
+                                    case "H. Kaiba" => {
+                                        <div class="item"><img src="@routes.Assets.versioned("images/players/H. Kaiba.png")"/></div>
+                                    }
+                                    case "K. Kawaguchi" => {
+                                        <div class="item"><img src="@routes.Assets.versioned("images/players/K. Kawaguchi.png")"/></div>
+                                    }
+                                    case "P. B. Rainbow" => {
+                                        <div class="item"><img src="@routes.Assets.versioned("images/players/P. B. Rainbow.png")"/></div>
+                                    }
+                                    case _ => {
+                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Default.png")"/></div>
+                                    }
+                                }
+                            }
+                            </td>
                         }
-                        </td>
                     } else {
                         <td class="field">-</td>
                     }

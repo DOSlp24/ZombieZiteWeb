@@ -6,7 +6,7 @@
     font-size: 2em;
 }
 
-#container {
+#mainContainer {
     height: 100%;
     width: 100%;
     display: flex;
@@ -79,14 +79,60 @@
     border-color: coral;
     border-style: ridge;
     border-width: medium;
-    width: 100px;
-    height: 100px;
+    width: 105px;
+    height: 105px;
     text-align: center;
     margin: 0px;
 }
 
 .centered {
     text-align: center;
+}
+
+.bordered {
+    border-color: black;
+    border-style: solid;
+    border-width: medium;
+}
+
+.borderedRight {
+    border-right: 1px black solid;
+}
+
+.borderedLeft {
+    border-left: 1px black solid;
+}
+
+.borderedBottom {
+    border-bottom: 1px black solid;
+}
+
+.waitButton {
+    icon: url("../images/zombies/Default.png");
+}
+
+.smallMarginBottom {
+    margin-bottom: 5%;
+}
+
+.bigMarginBottom {
+    margin-bottom: 15%;
+}
+
+.testContainer {
+    font-size: 0; /*fix inline gaps*/
+    height: 100%;
+    margin: 0%;
+}
+
+.item {
+    font-size: 16px; /*reset font size*/
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    height: 50%;
+    position: relative;
+    overflow: auto; /*for scrollbar*/
 }
 
 table {
