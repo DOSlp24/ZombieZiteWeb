@@ -20,7 +20,6 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
   def about() = Action { implicit request: Request[AnyContent] =>
     c.init(4)
-    println(c.attackableFields(c.actualPlayer).apply(0).players)
     Ok(views.html.About())
   }
 
@@ -92,9 +91,6 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def getJson() = Action {
-    val actualPlayer = c.actualPlayer
-
-
     implicit val item = new Writes[Item] {
 
       def writes(i: Item) = i match {
