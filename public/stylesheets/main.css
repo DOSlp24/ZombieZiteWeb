@@ -13,7 +13,7 @@
     flex-direction: row-reverse;
 }
 
-#area {
+#playground {
     border-color: black;
     border-style: ridge;
     border-width: medium;
@@ -22,7 +22,7 @@
     margin: 3px;
 }
 
-#nonarea {
+#nonPlayground {
     border-color: black;
     border-style: ridge;
     border-width: medium;
@@ -31,7 +31,7 @@
     margin: 3px;
 }
 
-#area, #nonarea {
+#playground, #nonPlayground {
     display: inline-block;
     *display: inline;
     zoom: 1;

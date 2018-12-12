@@ -20,22 +20,22 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
   def index() = Action { implicit request: Request[AnyContent] =>
     c.init(4)
-    Ok(views.html.index(c))
+    Ok(views.html.ZombieZite(c))
   }
 
   def newGame(num: String) = Action { implicit request: Request[AnyContent] =>
     c.init(Integer.parseInt(num))
-    Ok(views.html.index(c))
+    Ok(views.html.ZombieZite(c))
   }
 
   def callWait() = Action { implicit request: Request[AnyContent] =>
     c.wait(c.actualPlayer)
-    Ok(views.html.index(c))
+    Ok(views.html.ZombieZite(c))
   }
 
   def callSearch() = Action { implicit request: Request[AnyContent] =>
     c.search(c.actualPlayer)
-    Ok(views.html.index(c))
+    Ok(views.html.ZombieZite(c))
   }
 
   def callMove(direction: String) = Action { implicit request: Request[AnyContent] =>
@@ -45,7 +45,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
       case "left" => c.move(c.actualPlayer, -1, 0)
       case "right" => c.move(c.actualPlayer, 1, 0)
     }
-    Ok(views.html.index(c))
+    Ok(views.html.ZombieZite(c))
   }
 }
 
