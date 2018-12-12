@@ -92,10 +92,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def getJson() = Action {
-    val playerCount = c.playerCount
     val actualPlayer = c.actualPlayer
-    val attackableFields = c.attackableFields(actualPlayer)
-    val inv = actualPlayer.equipment
 
 
     implicit val item = new Writes[Item] {
@@ -193,5 +190,6 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 }
 
 case class GameState(round: Int, kills: Int, winCount: Int, players: Array[PlayerInterface])
+
 case class GameSnapshot(area: AreaInterface, actualPlayer: PlayerInterface, stat: GameState, af: Array[FieldInterface])
 
