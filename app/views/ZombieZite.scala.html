@@ -60,14 +60,6 @@
     controller.zombies
 }
 
-@feld = @{
-    controller.area
-}
-
-@attackableFields = @{
-    controller.attackableFields(controller.actualPlayer)
-}
-
 @main("Welcome to the Zombie Pit!") {
     <head>
         <script src="@routes.Assets.versioned("javascripts/zombiezite.js")" type="text/javascript"></script>
@@ -303,8 +295,8 @@
             </div>
         </div>
 
-        <div id="playground">
-        </div>
+        <!-- Javascript Hook for Area/Playground -->
+        <div id="playground"/>
     </div>
 }
 
