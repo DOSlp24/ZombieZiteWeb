@@ -186,7 +186,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
 
     val gameState = GameState(c.round, c.zombiesKilled, c.winCount, c.player)
-    val myJson = Json.toJson(GameSnapshot(c.area, c.actualPlayer, gameState, c.attackableFields(c.actualPlayer)))
+    val myJson = Json.toJson(GameSnapshot(c.area, c.actualPlayer, gameState, attackableFields))
     Ok(myJson)
   }
 
