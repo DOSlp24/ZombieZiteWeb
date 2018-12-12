@@ -1,0 +1,94 @@
+#title {
+    font-size: 3em;
+}
+
+#subtitle {
+    font-size: 2em;
+}
+
+#container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#area {
+    border-color: black;
+    border-style: ridge;
+    border-width: medium;
+    width: fit-content;
+    height: auto;
+    margin: 3px;
+}
+
+#nonarea {
+    border-color: black;
+    border-style: ridge;
+    border-width: medium;
+    width: 40%;
+    height: 100%;
+    margin: 3px;
+}
+
+#area, #nonarea {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    vertical-align: top;
+}
+
+#statContainer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+#actualPlayer {
+    color: coral;
+    font-size: 1.5em;
+}
+
+#status {
+    border-color: black;
+    border-style: dotted;
+    border-width: medium;
+    width: 30%;
+}
+
+#inventory {
+    border-color: black;
+    border-style: dotted;
+    border-width: medium;
+    width: 70%;
+    height: fit-content;
+}
+
+#actionCounter {
+    text-align: center;
+    font-size: 4em;
+}
+
+.title {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.field {
+    border-color: coral;
+    border-style: ridge;
+    border-width: medium;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    margin: 0px;
+}
+
+.centered {
+    text-align: center;
+}
+
+table {
+    height: 100%;
+}
