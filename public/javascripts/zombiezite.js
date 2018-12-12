@@ -58,7 +58,9 @@ function listenToAttackableFields() {
 }
 
 function buildFields(area) {
+    $("#playground").append("<table id='myPlaygroundTable'/>");
     area.fields.forEach(function (line) {
+        $("#myPlaygroundTable").append("<tr id='playgroundTr" + area.fields.indexOf(line) + "'/>");
         line.forEach(function (field) {
             $x = field.position.x;
             $y = field.position.y;
@@ -68,7 +70,8 @@ function buildFields(area) {
             if ($y > 0) {
                 $y = $y / 2;
             }
-            $actualField = $("#field" + $x + "-" + $y);
+            $("#playgroundTr" + area.fields.indexOf(line)).append("<td id='field" + $y + "-" + $x + "' class='field'/>");
+            $actualField = $("#field" + $y + "-" + $x);
             if (field.chars.length > 0) {
                 if (field.chars.length > 4) {
                     $actualField.append(">4 Chars");
@@ -97,7 +100,7 @@ function markAttackableFields(attackableFields) {
         if ($y > 0) {
             $y = $y / 2;
         }
-        $actualField = $("#field" + $x + "-" + $y);
+        $actualField = $("#field" + $y + "-" + $x);
         $actualField.addClass("attackableField");
     });
 }

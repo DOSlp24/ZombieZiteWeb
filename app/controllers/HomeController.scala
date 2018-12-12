@@ -48,10 +48,10 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
   def callMove(direction: String) = Action { implicit request: Request[AnyContent] =>
     direction match {
-      case "up" => c.move(c.actualPlayer, 0, -1)
-      case "down" => c.move(c.actualPlayer, 0, 1)
-      case "left" => c.move(c.actualPlayer, -1, 0)
-      case "right" => c.move(c.actualPlayer, 1, 0)
+      case "up" => c.move(c.actualPlayer, -1, 0)
+      case "down" => c.move(c.actualPlayer, 1, 0)
+      case "left" => c.move(c.actualPlayer, 0, -1)
+      case "right" => c.move(c.actualPlayer, 0, 1)
     }
     Ok(views.html.ZombieZite(c))
   }
