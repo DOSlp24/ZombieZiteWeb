@@ -292,14 +292,6 @@
             </div>
 
             <div id="zombieContainer">
-                <h1 class="centered headline">Zombies</h1>
-                <ul>
-                @for(i <- zombies.indices) {
-                    <li>@zombies.apply(i).name:
-                        (@zombies.apply(i).actualField.p.x,@zombies.apply(i).actualField.p.y)
-                        @zombies.apply(i).lifePoints LP</li>
-                }
-                </ul>
             </div>
         </div>
 

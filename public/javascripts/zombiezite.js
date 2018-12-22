@@ -57,6 +57,14 @@ function listenToAttackableFields() {
     }));
 }
 
+function buildZombieContainer(zombies) {
+    $("#zombieContainer").append("<h1 class=\"centered headline\">Zombies</h1>");
+    $("#zombieContainer").append("<ul id='zombieContainerList'/>");
+    zombies.forEach(function (actualZombie) {
+        $("#zombieContainerList").append("<li>" + actualZombie.name + ":(" + actualZombie.actualPosition.x + "," + actualZombie.actualPosition.y + ")" + actualZombie.lifePoints + " LP </li>");
+    });
+}
+
 function buildFields(area) {
     $("#playground").append("<table id='myPlaygroundTable'/>");
     area.fields.forEach(function (line) {
@@ -114,6 +122,7 @@ function loadJson() {
         success: function (result) {
             console.log(result);
 
+            buildZombieContainer(result.zombies);
             buildFields(result.area);
             markAttackableFields(result.attackableFields);
             initStatus();
