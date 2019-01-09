@@ -4,6 +4,14 @@ $(document).ready(function () {
     loadJson();
 });
 
+
+function checkDefeat(players) {
+    if (players.length === 0)
+        document.location.href = "/dead";
+
+}
+
+
 function initStatus() {
     $("#inventoryTrash").hide();
 
@@ -181,6 +189,8 @@ function loadJson() {
 
         success: function (result) {
             console.log(result);
+
+            checkDefeat(result.status.players)
 
             buildInfoBoardContainer(result.status);
             buildZombieContainer(result.zombies);
