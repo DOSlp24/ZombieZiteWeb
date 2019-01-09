@@ -124,6 +124,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
           "actualPosition" -> p.actualField.p,
           "lifePoints" -> p.lifePoints,
           "strength" -> p.strength,
+          "armor" -> p.armor,
           "range" -> p.range,
           "name" -> p.name,
           "equippedWeapon" -> p.equippedWeapon,
