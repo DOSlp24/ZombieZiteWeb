@@ -181,6 +181,34 @@ function markAttackableFields(attackableFields) {
     });
 }
 
+function bindArrowkeys() {
+    window.addEventListener("keydown", function (event) {
+        if (event.defaultPrevented) {
+            return; // Do nothing if the event was already processed
+        }
+
+        switch (event.key) {
+            case "ArrowDown":
+                document.location.href = "/move/down";
+                break;
+            case "ArrowUp":
+                document.location.href = "/move/up";
+                break;
+            case "ArrowLeft":
+                document.location.href = "/move/left";
+                break;
+            case "ArrowRight":
+                document.location.href = "/move/right";
+                break;
+            default:
+                return; // Quit when this doesn't handle the key event.
+        }
+
+        // Cancel the default action to avoid it being handled twice
+        event.preventDefault();
+    }, true);
+}
+
 function loadJson() {
     $.ajax({
         method: "GET",
@@ -201,6 +229,7 @@ function loadJson() {
             markAttackableFields(result.attackableFields);
             initStatus();
             listenToAttackableFields();
+            bindArrowkeys();
         }
     });
 }
