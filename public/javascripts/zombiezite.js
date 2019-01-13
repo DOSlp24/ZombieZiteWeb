@@ -4,6 +4,14 @@ $(document).ready(function () {
     loadJson();
 });
 
+
+function checkDefeat(players) {
+    if (players.length === 0)
+        document.location.href = "/dead";
+
+}
+
+
 function initStatus() {
     $("#inventoryTrash").hide();
 
@@ -56,6 +64,74 @@ function listenToAttackableFields() {
         document.location.href = "/attackField/" + e.currentTarget.id;
     }));
 }
+
+function buildZombieContainer(zombies) {
+    $("#zombieContainer").append("<h1 class=\"centered headline\">Zombies</h1>");
+    $("#zombieContainer").append("<ul id='zombieContainerList'/>");
+    zombies.forEach(function (actualZombie) {
+        $("#zombieContainerList").append("<li>" + actualZombie.name + ":(" + actualZombie.actualPosition.x + "," + actualZombie.actualPosition.y + ")" + actualZombie.lifePoints + " LP </li>");
+    });
+}
+
+
+function buildPlayerContainer(result) {
+    $("#playerContainer").append("<img src='/assets/images/players/" + result.actualPlayer.name + " por.png'/>");
+
+    $("#playerContainer").append("<ul id='playerContainerList'/>");
+    result.status.players.forEach(function (thePlayer) {
+        if (thePlayer.name === result.actualPlayer.name)
+            $("#playerContainerList").append( "<p id='actualPlayer' class='centered'>>"+thePlayer.name+"</p>");
+        else
+            $("#playerContainerList").append( "<p id='notActualPlayer' class='centered'>"+thePlayer.name+"</p>");
+    });
+
+    $("#playerContainer").append("<h1 id='actionCounter'>");
+    for (schritt = 0; schritt < result.actualPlayer.ActionCounter; schritt++)
+        $("#actionCounter").append("*");
+
+    $("#playerContainer").append("</h1>");
+
+}
+
+
+function buildInfoBoardContainer(status) {
+    $("#infoBoard").append("<h1 class=\"centered headline\">Info Board</h1>");
+    $("#infoBoard").append("<div class='text-info'>Runde "+status.round+"</div>");
+    $("#infoBoard").append("<div class='text-info'>"+status.kills+"/" +status.winCount+ "Zombies erledigt.</div>");
+}
+
+
+function buildStatusContainer(actualPlayer) {
+    $("#status").append("<h1 class=\"centered headline\">Status</h1>");
+    $("#status").append("<p class='centered'>My Field: (" + actualPlayer.actualPosition.x + "," + actualPlayer.actualPosition.y + ")</p>");
+    $("#status").append("<p class=\"centered\">LP: "+ actualPlayer.lifePoints +"</p>");
+    $("#status").append("<p class=\"centered\">Strength: "+ actualPlayer.strength +"</p>");
+    $("#status").append("<p class=\"centered\">Armor: "+ actualPlayer.armor +"</p>");
+    $("#status").append("<p class=\"centered\">Equiped Weapon: "+ actualPlayer.equippedWeapon.name +"</p>");
+}
+
+
+function buildInventoryContainer(actualPlayer) {
+    $("#equippedWeapon").append("<img src='/assets/images/weapons/" + actualPlayer.equippedWeapon.name + ".png'/>");
+
+    var iIndex = 0;
+    actualPlayer.inventory.forEach(function (theItem) {
+        var itemType = ""
+        if (theItem.name === "Axe" || theItem.name === "Big Mama" || theItem.name === "EVIL SISTERS" || theItem.name === "Flame Thrower" ||
+            theItem.name === "Knife" || theItem.name === "Mashine Gun" || theItem.name === "Pan" || theItem.name === "Pistol" ||
+            theItem.name === "Shotgun" || theItem.name === "Sniper" )
+            itemType = "inventoryWeapon";
+        if (theItem.name === "Boots" || theItem.name === "Chest" || theItem.name === "Healkit" || theItem.name === "Holy Armor" || theItem.name === "Swat-Shield")
+            itemType = "inventoryArmor";
+
+        $("#inventoryContainer").append("<div class=\"col\"><img id='inventory:"+ iIndex+"' class='"+itemType+" inventoryItem' src='/assets/images/items/" + theItem.name + ".png'/>");
+        iIndex = iIndex + 1;
+    });
+
+    if (actualPlayer.inventory.length == 0)
+        $("#topInventoryContainer").append("<p class=\"centered\">Inventory is empty.</p>");
+}
+
 
 function buildFields(area) {
     $("#playground").append("<table id='myPlaygroundTable'/>");
@@ -114,6 +190,13 @@ function loadJson() {
         success: function (result) {
             console.log(result);
 
+            checkDefeat(result.status.players)
+
+            buildInfoBoardContainer(result.status);
+            buildZombieContainer(result.zombies);
+            buildPlayerContainer(result);
+            buildStatusContainer(result.actualPlayer);
+            buildInventoryContainer(result.actualPlayer);
             buildFields(result.area);
             markAttackableFields(result.attackableFields);
             initStatus();

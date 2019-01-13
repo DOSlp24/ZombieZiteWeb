@@ -4,10 +4,10 @@ import de.htwg.se.zombiezite
 import de.htwg.se.zombiezite.ZombieZiteApp
 import de.htwg.se.zombiezite.model._
 import javax.inject._
-import play.api.mvc._
 import play.api.libs.json._
+import play.api.mvc._
 
-import scala.util.parsing.json.JSONObject
+import scala.collection.mutable.ArrayBuffer
 
 
 /**
@@ -29,6 +29,10 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
   def showPlayground() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.ZombieZite(c))
+  }
+
+  def dead() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.dead())
   }
 
   def newGame(num: String) = Action { implicit request: Request[AnyContent] =>
@@ -124,6 +128,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
           "actualPosition" -> p.actualField.p,
           "lifePoints" -> p.lifePoints,
           "strength" -> p.strength,
+          "armor" -> p.armor,
           "range" -> p.range,
           "name" -> p.name,
           "equippedWeapon" -> p.equippedWeapon,
@@ -173,13 +178,14 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
         "status" -> m.stat,
         "area" -> m.area,
         "actualPlayer" -> m.actualPlayer,
-        "attackableFields" -> m.af
+        "attackableFields" -> m.af,
+        "zombies" -> m.zombies
       )
     }
 
 
     val gameState = GameState(c.round, c.zombiesKilled, c.winCount, c.player)
-    val myJson = Json.toJson(GameSnapshot(c.area, c.actualPlayer, gameState, c.attackableFields(c.actualPlayer)))
+    val myJson = Json.toJson(GameSnapshot(c.area, c.actualPlayer, gameState, c.attackableFields(c.actualPlayer), c.zombies))
     Ok(myJson)
   }
 
@@ -187,5 +193,5 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
 case class GameState(round: Int, kills: Int, winCount: Int, players: Array[PlayerInterface])
 
-case class GameSnapshot(area: AreaInterface, actualPlayer: PlayerInterface, stat: GameState, af: Array[FieldInterface])
+case class GameSnapshot(area: AreaInterface, actualPlayer: PlayerInterface, stat: GameState, af: Array[FieldInterface], zombies: ArrayBuffer[ZombieInterface])
 

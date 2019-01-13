@@ -8,6 +8,7 @@ GET        /                          controllers.HomeController.index
 GET        /about                     controllers.HomeController.about
 GET        /playground                controllers.HomeController.showPlayground
 GET        /new/*num                  controllers.HomeController.newGame(num)
+GET        /dead                      controllers.HomeController.dead
 
 # Communication
 GET        /wait                      controllers.HomeController.callWait
