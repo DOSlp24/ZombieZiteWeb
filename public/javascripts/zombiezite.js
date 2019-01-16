@@ -12,6 +12,13 @@ function checkDefeat(players) {
 }
 
 
+function checkVictory(status) {
+    if (status.kills >= status.winCount)
+        document.location.href = "/win";
+
+}
+
+
 function initStatus() {
     $("#inventoryTrash").hide();
 
@@ -219,6 +226,7 @@ function loadJson() {
             console.log(result);
 
             checkDefeat(result.status.players)
+            checkVictory(result.status)
 
             buildInfoBoardContainer(result.status);
             buildZombieContainer(result.zombies);
