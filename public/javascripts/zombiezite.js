@@ -233,3 +233,11 @@ function loadJson() {
         }
     });
 }
+
+var inventoryContainer = new Vue({
+    el: '#inventoryContainer',
+    data: {
+        item: 'VueItem'
+    }
+
+})
