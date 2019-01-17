@@ -25,3 +25,6 @@ GET        /assets/*file              controllers.Assets.versioned(path="/public
 
 # Ajax Stuff
 GET        /json                    controllers.HomeController.getJson
+
+# Polymer
+GET        /polymer                 controllers.HomeController.polymer

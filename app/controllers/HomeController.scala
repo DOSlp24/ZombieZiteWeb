@@ -50,6 +50,10 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.ZombieZite(c))
   }
 
+  def polymer() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.Polymer())
+  }
+
   def callMove(direction: String) = Action { implicit request: Request[AnyContent] =>
     direction match {
       case "up" => c.move(c.actualPlayer, -1, 0)
