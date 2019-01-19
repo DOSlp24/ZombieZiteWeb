@@ -19,9 +19,12 @@ GET        /attackField/*coord        controllers.HomeController.attackField(coo
 GET        /equipArmor/*index         controllers.HomeController.equipArmor(index: String)
 GET        /equipWeapon/*index        controllers.HomeController.equipWeapon(index: String)
 GET        /unequipWeapon             controllers.HomeController.unequipWeapon
-GET        /trashItem/*index         controllers.HomeController.trashItem(index: String)
+GET        /trashItem/*index          controllers.HomeController.trashItem(index: String)
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file              controllers.Assets.versioned(path="/public", file: Asset)
 
 # Ajax Stuff
-GET        /json                    controllers.HomeController.getJson
+GET        /json                      controllers.HomeController.ajaxJson
+
+# Web Sockets Teritory
+GET        /webSockets                controllers.HomeController.webSocketJson
