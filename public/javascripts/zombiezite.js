@@ -141,7 +141,7 @@ function buildZombieContainer(zombies) {
     $("#zombieContainer").append("<h1 class=\"centered headline\">Zombies</h1>");
     $("#zombieContainer").append("<ul id='zombieContainerList'/>");
     zombies.forEach(function (actualZombie) {
-        $("#zombieContainerList").append("<li>" + actualZombie.name + ":(" + actualZombie.actualPosition.x + "," + actualZombie.actualPosition.y + ")" + actualZombie.lifePoints + " LP </li>");
+        $("#zombieContainerList").append("<li>" + actualZombie.name + ":(" + actualZombie.actualPosition.x/2 + "," + actualZombie.actualPosition.y/2 + ")" + actualZombie.lifePoints + " LP </li>");
     });
 }
 
@@ -172,7 +172,7 @@ function buildInfoBoardContainer(status) {
 
 function buildStatusContainer(actualPlayer) {
     $("#status").append("<h1 class=\"centered headline\">Status</h1>");
-    $("#status").append("<p class='centered'>My Field: (" + actualPlayer.actualPosition.x + "," + actualPlayer.actualPosition.y + ")</p>");
+    $("#status").append("<p class='centered'>My Field: (" + actualPlayer.actualPosition.x/2 + "," + actualPlayer.actualPosition.y/2 + ")</p>");
     $("#status").append("<p class=\"centered\">LP: " + actualPlayer.lifePoints + "</p>");
     $("#status").append("<p class=\"centered\">Strength: " + actualPlayer.strength + "</p>");
     $("#status").append("<p class=\"centered\">Armor: " + actualPlayer.armor + "</p>");
