@@ -1,0 +1,51 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<dom-module id="my-home">
+    <template>
+        <style>
+
+            :host {
+                display: block;
+            }
+        </style>
+        <h2>[[prop1]]!</h2>
+        <h2>Schlurfi: [[schlurfi]]</h2>
+        <h2>Spitter: [[spitter]]</h2>
+        <h2>Runner: [[runner]]</h2>
+        <h2>Tank: [[tank]]</h2>
+    </template>
+    <script>
+        /**
+         * @customElement
+         * @polymer
+         */
+        class MyHome extends Polymer.Element {
+            static get is() { return 'my-home'; }
+            static get properties() {
+                return {
+                    prop1: {
+                        type: String,
+                        value: 'Zombies'
+                    },
+                    schlurfi: {
+                        type: String,
+                        value: 'Ein Normalo - Der kann nichts Besonderes.'
+                    },
+                    spitter: {
+                        type: String,
+                        value: 'Dieser Zombie kann ueber zwei Felder angreifen.'
+                    },
+                    runner: {
+                        type: String,
+                        value: 'Dieser Flitzer kann pro Runde zwei Aktionspunkte verbrauchen.'
+                    },
+                    tank: {
+                        type: String,
+                        value: 'Dieses Monstrum hat viel mehr Leben als seine Artgenossen. Froehliches Kloppen!'
+                    }
+                };
+            }
+        }
+
+        window.customElements.define(MyHome.is, MyHome);
+    </script>
+</dom-module>
