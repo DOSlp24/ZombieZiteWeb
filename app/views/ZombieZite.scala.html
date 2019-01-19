@@ -1,134 +1,47 @@
 @(controller: de.htwg.se.zombiezite.controller.ControllerInterface)
 
-@roundNumber = @{
-    controller.round
-}
 
-@zombiesKilled = @{
-    controller.zombiesKilled
-}
-
-@killsNeeded = @{
-    controller.winCount
-}
-
-@playerCount = @{
-    controller.playerCount
-}
-
-@playerNames = @{
-    controller.playerNamer
-}
-
-@playerSize = @{
-    controller.playerNamer.length
-}
-
-@actualPlayer = @{
-    controller.actualPlayer.name
-}
-
-@equipedWeapon = @{
-    controller.actualPlayer.equippedWeapon.name
-}
-
-@actualField = @{
-    (controller.actualPlayer.actualField.p.x, controller.actualPlayer.actualField.p.y)
-}
-
-@lifePoints = @{
-    controller.actualPlayer.lifePoints
-}
-
-@strength = @{
-    controller.actualPlayer.strength
-}
-
-@armor = @{
-    controller.actualPlayer.armor
-}
-
-@remainingActions = @{
-    controller.actualPlayer.actionCounter
-}
-
-@inventory = @{
-    controller.actualPlayer.equipment
-}
-
-@zombies = @{
-    controller.zombies
-}
-
-@feld = @{
-    controller.area
-}
-
-@index(controller) {
+@main("Welcome to the Zombie Pit!") {
+    <head>
+        <script src="@routes.Assets.versioned("javascripts/zombiezite.js")" type="text/javascript"></script>
+    </head>
 
     <div id="mainContainer">
         <div id="nonPlayground">
             <div class="container row">
-                <div class="col-sm-3 borderedRight borderedBottom" align="center">
-                    @if(actualPlayer == "F. Maiar") {
-                        <img src="@routes.Assets.versioned("images/players/F. Maiar Por.png")">
-                    }
-                    @if(actualPlayer == "H. Kaiba") {
-                        <img src="@routes.Assets.versioned("images/players/H. Kaiba Por.png")">
-                    }
-                    @if(actualPlayer == "K. Kawaguchi") {
-                        <img src="@routes.Assets.versioned("images/players/K. Kawaguchi Por.png")">
-                    }
-                    @if(actualPlayer == "P. B. Rainbow") {
-                        <img src="@routes.Assets.versioned("images/players/P. B. Rainbow Por.png")">
-                    }
-
-                    @for(i <- 0 until playerCount) {
-                        @if(playerNames.apply(i) == actualPlayer) {
-                            <p id="actualPlayer" class="centered">>@playerNames.apply(i)</p>
-                        } else {
-                            <p class="centered">@playerNames.apply(i)</p>
-                        }
-                    }
-                    <h1 id="actionCounter">
-                    @for(i <- 0 until remainingActions) {
-                        *
-                    }
-                    </h1>
+                <div class="col-sm-3 borderedRight borderedBottom" id="playerContainer" align="center">
                 </div>
-                <div class="col-sm-3 borderedRight borderedBottom" align="center">
-                    <div class="text-info">Runde @roundNumber</div>
-                    <div class="text-info">@zombiesKilled/@killsNeeded Zombies erledigt.</div>
+                <div class="col-sm-3 borderedRight borderedBottom" id="infoBoard" align="center">
                 </div>
-                <div class="col-sm-6 borderedRight borderedBottom" align="center">
+                <div class="col-sm-6 borderedRight borderedBottom buttonScale" align="center">
                     <div class="row justify-content-center smallMarginBottom">
                         <a class="btn btn-dark" href="/move/up">
-                            <img src="@routes.Assets.versioned("images/icons/Up.png")" width="auto" height="auto"/>
+                            <img class="buttonScale" src="@routes.Assets.versioned("images/icons/Up.png")"/>
                         </a>
                     </div>
                     <div class="row justify-content-center bigMarginBottom">
                         <a class="btn btn-dark" href="/move/left">
-                            <img src="@routes.Assets.versioned("images/icons/Left.png")" width="auto" height="auto"/>
+                            <img class="buttonScale" src="@routes.Assets.versioned("images/icons/Left.png")"/>
                         </a>
                         <a class="btn btn-dark" href="/move/down">
-                            <img src="@routes.Assets.versioned("images/icons/Down.png")" width="auto" height="auto"/>
+                            <img class="buttonScale" src="@routes.Assets.versioned("images/icons/Down.png")"/>
 
                         </a>
                         <a class="btn btn-dark" href="/move/right">
-                            <img src="@routes.Assets.versioned("images/icons/Right.png")" width="auto" height="auto"/>
+                            <img class="buttonScale" class="buttonScale" src="@routes.Assets.versioned("images/icons/Right.png")"/>
                         </a>
                     </div>
                     <div class="row justify-content-center">
                         <a class="btn btn-success" href="/search">
-                            <img src="@routes.Assets.versioned("images/icons/Search.png")" width="auto" height="auto"/>
+                            <img class="buttonScale" src="@routes.Assets.versioned("images/icons/Search.png")" />
                             Search
                         </a>
                         <a class="btn btn-primary" href="/wait">
-                            <img src="@routes.Assets.versioned("images/icons/Wait.png")" width="auto" height="auto"/>
+                            <img class="buttonScale" src="@routes.Assets.versioned("images/icons/Wait.png")"/>
                             Wait
                         </a>
                         <a class="btn btn-danger" href="#">
-                            <img src="@routes.Assets.versioned("images/icons/Attack.png")" width="auto" height="auto"/>
+                            <img class="buttonScale" src="@routes.Assets.versioned("images/icons/Attack.png")"/>
                             Attack
                         </a>
                     </div>
@@ -137,210 +50,35 @@
 
             <div id="statContainer">
                 <div id="status">
-                    <h1 class="centered">Status</h1>
-                    <p class="centered">My Field: @actualField</p>
-                    <p class="centered">LP: @lifePoints</p>
-                    <p class="centered">Strength: @strength</p>
-                    <p class="centered">Armor: @armor</p>
-                    <p class="centered">Equiped Weapon: @equipedWeapon</p>
                 </div>
                 <div id="inventory">
-                    <h1 class="centered">Equipment</h1>
                     <div class="container">
-                        <div class="row centered smallMarginBottom">
-                            <div class="col inventoryItem" id="equippedWeapon">
-                            @equipedWeapon match {
-                                case "Axe" => {
-                                    <img src="@routes.Assets.versioned("images/weapons/Axe.png")"/>
-                                }
-                                case "Big Mama" => {
-                                    <img src="@routes.Assets.versioned("images/weapons/Big Mama.png")"/>
-                                }
-                                case "EVIL SISTERS" => {
-                                    <img src="@routes.Assets.versioned("images/weapons/EVIL SISTERS.png")"/>
-                                }
-                                case "Fist" => {
-                                    <img src="@routes.Assets.versioned("images/weapons/Fists.png")"/>
-                                }
-                                case "Flame Thrower" => {
-                                    <img src="@routes.Assets.versioned("images/weapons/Flame Thrower.png")"/>
-                                }
-                                case "Knife" => {
-                                    <img src="@routes.Assets.versioned("images/weapons/Knife.png")"/>
-                                }
-                                case "Mashine Gun" => {
-                                    <img src="@routes.Assets.versioned("images/weapons/Mashine Gun.png")"/>
-                                }
-                                case "Pan" => {
-                                    <img src="@routes.Assets.versioned("images/weapons/Pan.png")"/>
-                                }
-                                case "Pistol" => {
-                                    <img src="@routes.Assets.versioned("images/weapons/Pistol.png")"/>
-                                }
-                                case "Shotgun" => {
-                                    <img src="@routes.Assets.versioned("images/weapons/Shotgun.png")"/>
-                                }
-                                case "Sniper" => {
-                                    <img src="@routes.Assets.versioned("images/weapons/Sniper.png")"/>
-                                }
-                                case _ => {
-                                    <img src="@routes.Assets.versioned("images/weapons/Default.png")"/>
-                                }
-                            }
-                            </div>
-                        </div>
-                        <div class="row">
-                        @for(z <- 0 until inventory.length) {
+                        <div class="row centered">
                             <div class="col">
-                            @inventory.apply(z).name match {
-                                case "Axe" => {
-                                    <img src="@routes.Assets.versioned("images/items/Axe.png")"/>
-                                }
-                                case "Big Mama" => {
-                                    <img src="@routes.Assets.versioned("images/items/Big Mama.png")"/>
-                                }
-                                case "Boots" => {
-                                    <img src="@routes.Assets.versioned("images/items/Boots.png")"/>
-                                }
-                                case "Bottle" => {
-                                    <img src="@routes.Assets.versioned("images/items/Bottle.png")"/>
-                                }
-                                case "Canned Food" => {
-                                    <img src="@routes.Assets.versioned("images/items/Canned Food.png")"/>
-                                }
-                                case "Chest" => {
-                                    <img src="@routes.Assets.versioned("images/items/Chest.png")"/>
-                                }
-                                case "EVIL SISTERS" => {
-                                    <img src="@routes.Assets.versioned("images/items/Evil Sisters.png")"/>
-                                }
-                                case "Flame Thrower" => {
-                                    <img src="@routes.Assets.versioned("images/items/Flame Thrower.png")"/>
-                                }
-                                case "Healkit" => {
-                                    <img src="@routes.Assets.versioned("images/items/Healkit.png")"/>
-                                }
-                                case "Holy Armor" => {
-                                    <img src="@routes.Assets.versioned("images/items/Holy Armor.png")"/>
-                                }
-                                case "Knife" => {
-                                    <img src="@routes.Assets.versioned("images/items/Knife.png")"/>
-                                }
-                                case "Mashine Gun" => {
-                                    <img src="@routes.Assets.versioned("images/items/Machine Gun.png")"/>
-                                }
-                                case "Money" => {
-                                    <img src="@routes.Assets.versioned("images/items/Money.png")"/>
-                                }
-                                case "Pan" => {
-                                    <img src="@routes.Assets.versioned("images/items/Pan.png")"/>
-                                }
-                                case "Pistol" => {
-                                    <img src="@routes.Assets.versioned("images/items/Pistol.png")"/>
-                                }
-                                case "Rice" => {
-                                    <img src="@routes.Assets.versioned("images/items/Rice.png")"/>
-                                }
-                                case "Shotgun" => {
-                                    <img src="@routes.Assets.versioned("images/items/Shotgun.png")"/>
-                                }
-                                case "Sniper" => {
-                                    <img src="@routes.Assets.versioned("images/items/Sniper.png")"/>
-                                }
-                                case "Stone" => {
-                                    <img src="@routes.Assets.versioned("images/items/Stone.png")"/>
-                                }
-                                case "Swat-Shield" => {
-                                    <img src="@routes.Assets.versioned("images/items/Swat-Shield.png")"/>
-                                }
-                                case "Trash" => {
-                                    <img src="@routes.Assets.versioned("images/items/Trash.png")"/>
-                                }
-                                case "Water" => {
-                                    <img src="@routes.Assets.versioned("images/items/Water.png")"/>
-                                }
-                                case _ => {
-                                    <img src="@routes.Assets.versioned("images/items/Empty.png")"/>
-                                }
-                            }
+                                <h1 class="centered headline">Equipment</h1>
                             </div>
-
-                        }
+                            <div class="col">
+                                <h1 id="inventoryTrash" class="alert-danger">Trash</h1>
+                            </div>
                         </div>
                     </div>
-
-
-                    @if(inventory.isEmpty) {
-                        <p class="centered">Inventory is empty.</p>
-                    }
+                    <div class="container" id="topInventoryContainer">
+                        <div class="row centered smallMarginBottom">
+                            <div class="col" id="equippedWeapon">
+                            </div>
+                        </div>
+                        <div class="row" id="inventoryContainer">
+                            <h1>{{ item }}</h1>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div id="zombieContainer">
-                <h1 class="centered">Zombies</h1>
-                <ul>
-                @for(i <- zombies.indices) {
-                    <li>@zombies.apply(i).name:
-                        (@zombies.apply(i).actualField.p.x,@zombies.apply(i).actualField.p.y)
-                        @zombies.apply(i).lifePoints LP</li>
-                }
-                </ul>
             </div>
         </div>
 
         <div id="playground">
-            <table>
-            @for(y <- 0 until feld.laenge) {
-                <tr>
-                @for(x <- 0 until feld.breite) {
-                    @if(feld.line(x)(y).chars.nonEmpty) {
-                        @if(feld.line(x)(y).chars.length > 4) {
-                            <td class="field">>4 Chars</td>
-                        } else {
-                            <td class="testContainer field" align="left">
-                            @for(c <- feld.line(x)(y).chars.indices) {
-                                @feld.line(x)(y).chars.apply(c).name match {
-                                    case "Fatti" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Fatti.png")"/></div>
-                                    }
-                                    case "Runner" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Runner.png")"/></div>
-                                    }
-                                    case "Schlurfer" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Schlurfer.png")"/></div>
-                                    }
-                                    case "Spitter" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Spitter.png")"/></div>
-                                    }
-                                    case "Tank" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Tank.png")"/></div>
-                                    }
-                                    case "F. Maiar" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/players/F. Maiar.png")"/></div>
-                                    }
-                                    case "H. Kaiba" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/players/H. Kaiba.png")"/></div>
-                                    }
-                                    case "K. Kawaguchi" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/players/K. Kawaguchi.png")"/></div>
-                                    }
-                                    case "P. B. Rainbow" => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/players/P. B. Rainbow.png")"/></div>
-                                    }
-                                    case _ => {
-                                        <div class="item"><img src="@routes.Assets.versioned("images/zombies/Default.png")"/></div>
-                                    }
-                                }
-                            }
-                            </td>
-                        }
-                    } else {
-                        <td class="field">-</td>
-                    }
-                }
-                </tr>
-            }
-            </table>
         </div>
     </div>
 }

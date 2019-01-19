@@ -49,6 +49,10 @@
     font-size: 1.5em;
 }
 
+#notActualPlayer{
+    font-size: 1em;
+}
+
 #status {
     border-color: black;
     border-style: dotted;
@@ -69,6 +73,16 @@
     font-size: 4em;
 }
 
+#buttonScale {
+    width: auto;
+    height: auto;
+}
+
+#topAbout {
+    margin: 5px;
+    padding: 5px;
+}
+
 .title {
     width: fit-content;
     margin-left: auto;
@@ -85,8 +99,27 @@
     margin: 0px;
 }
 
+.attackableField {
+    border-color: #721c24;
+    background-color: #c82333;
+    border-style: ridge;
+    border-width: medium;
+    width: 105px;
+    height: 105px;
+    text-align: center;
+    margin: 0px;
+}
+
 .centered {
     text-align: center;
+}
+
+.text-info{
+    font-size: 1em;
+}
+
+.headline {
+
 }
 
 .bordered {
@@ -107,16 +140,17 @@
     border-bottom: 1px black solid;
 }
 
-.waitButton {
-    icon: url("../images/zombies/Default.png");
-}
-
 .smallMarginBottom {
     margin-bottom: 5%;
 }
 
 .bigMarginBottom {
     margin-bottom: 15%;
+}
+
+.myTableBuffer {
+    margin-right: 5%;
+    margin-left: 5%;
 }
 
 .testContainer {
@@ -135,6 +169,135 @@
     overflow: auto; /*for scrollbar*/
 }
 
+.zombieContainer {
+    font-size: 1.5em;
+}
+
+.hardShade{
+    background: #f5f5f5;
+    border: 1px solid #DDD;
+    box-shadow: 3px 3px 0px rgba(0,0,0, .2);
+}
+
+.aboutSearch{
+    background-color: greenyellow;
+}
+
+.aboutMove{
+    background-color: darkgrey;
+}
+.aboutWait{
+    background-color: dodgerblue;
+}
+.aboutAttack{
+    background-color: red;
+}
+
 table {
     height: 100%;
 }
+
+
+
+
+/* Responsive stuff. Rearrange if necessary */
+/* When the width is not above 1850px - small screen */
+@media screen and (max-width: 925px) {
+
+    div.text-info {
+        /* This is an example to show screen size. Delete if obsolete!*/
+        background: red;
+    }
+
+    img {
+        max-width:25%;
+        height:auto;
+    }
+
+}
+
+/* When the width is above 1850px - normal screen */
+@media screen and (min-width: 926px) and (max-width: 1850px) {
+
+    div.text-info {
+        /* This is an example to show screen size. Delete if obsolete!*/
+        background: yellow;
+    }
+
+    img {
+        /*width:50%;*/
+        height:auto;
+        overflow:hidden;
+    }
+
+    #title {
+        font-size: 1em;
+    }
+
+    #subtitle {
+        font-size: 0.85em;
+    }
+
+    #actualPlayer {
+        font-size: 1em;
+    }
+
+    #notActualPlayer{
+        font-size: 0.75em;
+    }
+
+    #status {
+        font-size: 0.75em;
+    }
+
+    #inventory {
+        font-size: 0.75em;
+    }
+
+    #actionCounter {
+        font-size: 2em;
+    }
+
+    .buttonScale {
+        width: 50%;
+    }
+
+    .headline {
+        font-size: 2em;
+    }
+
+    .text-info{
+        font-size: 0.75em;
+    }
+
+    .field {
+        width: 55px;
+        height: 55px;
+    }
+
+    .attackableField {
+        width: 55px;
+        height: 55px;
+    }
+
+    .item {
+        width: 25%;
+        height: 25%;
+    }
+
+    #zombieContainer {
+        font-size: 0.75em;
+    }
+}
+
+/* When the width is above 1850px - big screen */
+@media screen and (min-width: 1851px) {
+
+    div.text-info {
+        /* This is an example to show screen size. Delete if obsolete!*/
+        background: green;
+    }
+}
+
+
+
