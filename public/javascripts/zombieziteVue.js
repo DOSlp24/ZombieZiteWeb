@@ -22,13 +22,28 @@
 
 function VueStuff(result) {
 
+    $("#inventoryContainer").append('<img class="col" v-for="(item, index) in items" :src="item.url" :id="\'inventory:\' + index" :json="setJson({ 'result' })"/>'');
+
+
+
+
     var inventoryContainer = new Vue({
         el: '#inventoryContainer',
         data: {
+
+            json: {},
+
+            /*
             items: [
                 { url: '/assets/images/players/K. Kawaguchi.png'},
                 { url: '/assets/images/players/K. Kawaguchi.png'}
             ]
+            */
+        },
+        methods: {
+            setJson (payload) {
+                this.json = payload
+            },
         }
 
             /*items: result.actualPlayer.inventory*/
