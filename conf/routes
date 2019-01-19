@@ -24,7 +24,7 @@ GET        /trashItem/*index         controllers.HomeController.trashItem(index:
 GET        /assets/*file              controllers.Assets.versioned(path="/public", file: Asset)
 
 # Ajax Stuff
-GET        /json                    controllers.HomeController.getJson
+GET        /json                    controllers.HomeController.ajaxJson
 
 # Polymer
 GET        /polymer                 controllers.HomeController.polymer

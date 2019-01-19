@@ -145,28 +145,29 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit system: ActorS
 
           println("Attack Received!")
           val coordinate = msg.slice(5, msg.length).split("-")
-          val x = Integer.parseInt(coordinate.apply(0).trim())
-          val y = Integer.parseInt(coordinate.apply(1).trim())
+          val x = Integer.parseInt(coordinate.apply(1).trim())
+          val y = Integer.parseInt(coordinate.apply(0).trim())
 
-          println("Attacking" + x + " " + y)
+          println("Attacking (X: " + x + " Y: " + y + ")")
 
           c.attackField(c.actualPlayer, c.area.line(x)(y))
+          sendJsonToClient
 
-        } else if(msg.startsWith("EquipWeapon")) { // Handle Equip Weapon
+        } else if (msg.startsWith("EquipWeapon")) { // Handle Equip Weapon
 
           val invPosition = msg.slice(12, msg.length)
           val itemIndex = Integer.parseInt(invPosition)
           val item: WeaponInterface = c.actualPlayer.equipment.apply(itemIndex).asInstanceOf[WeaponInterface]
           c.beweapon(c.actualPlayer, item)
 
-        } else if(msg.startsWith("Trash")) { // Handle Trash
+        } else if (msg.startsWith("Trash")) { // Handle Trash
 
           val invPosition = msg.slice(6, msg.length)
           val itemIndex = Integer.parseInt(invPosition)
           val item: Item = c.actualPlayer.equipment.apply(itemIndex)
           c.drop(c.actualPlayer, item)
 
-        } else if(msg.startsWith("EquipArmor")) { // Handle Equip Armor
+        } else if (msg.startsWith("EquipArmor")) { // Handle Equip Armor
 
           val invPosition = msg.slice(11, msg.length)
           val itemIndex = Integer.parseInt(invPosition)
@@ -270,7 +271,7 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit system: ActorS
     val coordinate = coord.slice(5, coord.length).split("-")
     val x = Integer.parseInt(coordinate.apply(0).trim())
     val y = Integer.parseInt(coordinate.apply(1).trim())
-    c.attackField(c.actualPlayer, c.area.line(x)(y))
+    c.attackField(c.actualPlayer, c.area.line(y)(x))
     Ok(views.html.ZombieZite(c))
   }
 
