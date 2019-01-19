@@ -240,12 +240,14 @@ function loadJson() {
             bindArrowkeys();
         }
     });
+    
+    /* --- Vue Stuff --- */
+
+    var inventoryContainer = new Vue({
+        el: '#inventoryContainer',
+        data: {
+            item: 'VueItem'
+        }
+
+    })
 }
-
-var inventoryContainer = new Vue({
-    el: '#inventoryContainer',
-    data: {
-        item: 'VueItem'
-    }
-
-})
