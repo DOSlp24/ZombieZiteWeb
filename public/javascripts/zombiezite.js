@@ -1,9 +1,77 @@
 $(document).ready(function () {
     console.log("Document is ready!");
 
-    loadJson();
+    createSocket();
+    //ajax();
 });
 
+var socket;
+
+function createSocket() {
+    socket = new WebSocket("ws://localhost:9000/webSockets");
+    socket.setTimeout;
+
+    $("#moveUpButton").click(function () {
+        socket.send("Move Up")
+    });
+
+    $("#moveDownButton").click(function () {
+        socket.send("Move Down")
+    });
+
+    $("#moveLeftButton").click(function () {
+        socket.send("Move Left")
+    });
+
+    $("#moveRightButton").click(function () {
+        socket.send("Move Right")
+    });
+
+    $("#waitButton").click(function () {
+        socket.send("Wait")
+    });
+
+    $("#searchButton").click(function () {
+        socket.send("Search")
+    });
+
+    socket.onopen = function () {
+        console.log("I just opened a socket!");
+        socket.send("Send Me Data");
+    };
+    socket.onmessage = function (message) {
+        if (socket.readyState == 1) {
+            if (message.data == "Winner") {
+                location.href = "/about"; //TODO Put the Winning Screen here
+            } else if (message.data == "Loser") {
+                location.href = "/dead ";
+            } else {
+
+                cleanUp();
+                buildUp(JSON.parse(message.data));
+                socket.send("I just got your JSON :D - Thanks!");
+            }
+        }
+
+    };
+    socket.onclose = function () {
+        console.log("Socket Closed!");
+    };
+}
+
+function ajax() {
+    $.ajax({
+        method: "GET",
+        url: "/json",
+        dataType: "json",
+
+        success: function (result) {
+            //socket.send("I just got your JSON :D - Thanks!");
+
+            buildUp(result)
+        }
+    });
+}
 
 function checkDefeat(players) {
     if (players.length === 0)
@@ -11,26 +79,28 @@ function checkDefeat(players) {
 
 }
 
-
 function initStatus() {
     $("#inventoryTrash").hide();
 
     $("#equippedWeapon").dblclick(function () {
-        document.location.href = "/unequipWeapon";
+        //document.location.href = "/unequipWeapon";
+        socket.send("Unequip");
     });
 
     $("#equippedWeapon").droppable({
         accept: ".inventoryWeapon", //Accept Weapons only
         drop: function (e, ui) {
             var index = ui.draggable[0].id.split(":")[1];
-            document.location.href = "/equipWeapon/" + index;
+            //document.location.href = "/equipWeapon/" + index;
+            socket.send("EquipWeapon " + index);
         }
     });
 
     $("#inventoryTrash").droppable({
         drop: function (e, ui) {
             var index = ui.draggable[0].id.split(":")[1];
-            document.location.href = "/trashItem/" + index;
+            //document.location.href = "/trashItem/" + index;
+            socket.send("Trash " + index);
         }
     });
 
@@ -38,7 +108,8 @@ function initStatus() {
         accept: ".inventoryArmor",
         drop: function (e, ui) {
             var index = ui.draggable[0].id.split(":")[1];
-            document.location.href = "/equipArmor/" + index;
+            //document.location.href = "/equipArmor/" + index;
+            socket.send("EquipArmor " + index);
         }
     });
 
@@ -61,7 +132,8 @@ function initStatus() {
 
 function listenToAttackableFields() {
     $(".attackableField").click((function (e) {
-        document.location.href = "/attackField/" + e.currentTarget.id;
+        socket.send(e.currentTarget.id)
+        //document.location.href = "/attackField/" + e.currentTarget.id;
     }));
 }
 
@@ -73,16 +145,15 @@ function buildZombieContainer(zombies) {
     });
 }
 
-
 function buildPlayerContainer(result) {
     $("#playerContainer").append("<img src='/assets/images/players/" + result.actualPlayer.name + " por.png'/>");
 
     $("#playerContainer").append("<ul id='playerContainerList'/>");
     result.status.players.forEach(function (thePlayer) {
         if (thePlayer.name === result.actualPlayer.name)
-            $("#playerContainerList").append( "<p id='actualPlayer' class='centered'>>"+thePlayer.name+"</p>");
+            $("#playerContainerList").append("<p id='actualPlayer' class='centered'>>" + thePlayer.name + "</p>");
         else
-            $("#playerContainerList").append( "<p id='notActualPlayer' class='centered'>"+thePlayer.name+"</p>");
+            $("#playerContainerList").append("<p id='notActualPlayer' class='centered'>" + thePlayer.name + "</p>");
     });
 
     $("#playerContainer").append("<h1 id='actionCounter'>");
@@ -93,25 +164,24 @@ function buildPlayerContainer(result) {
 
 }
 
-
 function buildInfoBoardContainer(status) {
     $("#infoBoard").append("<h1 class=\"centered headline\">Info Board</h1>");
-    $("#infoBoard").append("<div class='text-info'>Runde "+status.round+"</div>");
-    $("#infoBoard").append("<div class='text-info'>"+status.kills+"/" +status.winCount+ "Zombies erledigt.</div>");
+    $("#infoBoard").append("<div class='text-info'>Runde " + status.round + "</div>");
+    $("#infoBoard").append("<div class='text-info'>" + status.kills + "/" + status.winCount + "Zombies erledigt.</div>");
 }
-
 
 function buildStatusContainer(actualPlayer) {
     $("#status").append("<h1 class=\"centered headline\">Status</h1>");
     $("#status").append("<p class='centered'>My Field: (" + actualPlayer.actualPosition.x + "," + actualPlayer.actualPosition.y + ")</p>");
-    $("#status").append("<p class=\"centered\">LP: "+ actualPlayer.lifePoints +"</p>");
-    $("#status").append("<p class=\"centered\">Strength: "+ actualPlayer.strength +"</p>");
-    $("#status").append("<p class=\"centered\">Armor: "+ actualPlayer.armor +"</p>");
-    $("#status").append("<p class=\"centered\">Equiped Weapon: "+ actualPlayer.equippedWeapon.name +"</p>");
+    $("#status").append("<p class=\"centered\">LP: " + actualPlayer.lifePoints + "</p>");
+    $("#status").append("<p class=\"centered\">Strength: " + actualPlayer.strength + "</p>");
+    $("#status").append("<p class=\"centered\">Armor: " + actualPlayer.armor + "</p>");
+    $("#status").append("<p class=\"centered\">Equiped Weapon: " + actualPlayer.equippedWeapon.name + "</p>");
 }
 
-
 function buildInventoryContainer(actualPlayer) {
+    $("#topInventoryContainer").append("<div class='row centered smallMarginBottom'><div class='col' id='equippedWeapon'></div></div>");
+    $("#topInventoryContainer").append("<div class='row' id='inventoryContainer'></div>");
     $("#equippedWeapon").append("<img src='/assets/images/weapons/" + actualPlayer.equippedWeapon.name + ".png'/>");
 
     var iIndex = 0;
@@ -119,19 +189,18 @@ function buildInventoryContainer(actualPlayer) {
         var itemType = ""
         if (theItem.name === "Axe" || theItem.name === "Big Mama" || theItem.name === "EVIL SISTERS" || theItem.name === "Flame Thrower" ||
             theItem.name === "Knife" || theItem.name === "Mashine Gun" || theItem.name === "Pan" || theItem.name === "Pistol" ||
-            theItem.name === "Shotgun" || theItem.name === "Sniper" )
+            theItem.name === "Shotgun" || theItem.name === "Sniper")
             itemType = "inventoryWeapon";
         if (theItem.name === "Boots" || theItem.name === "Chest" || theItem.name === "Healkit" || theItem.name === "Holy Armor" || theItem.name === "Swat-Shield")
             itemType = "inventoryArmor";
 
-        $("#inventoryContainer").append("<div class=\"col\"><img id='inventory:"+ iIndex+"' class='"+itemType+" inventoryItem' src='/assets/images/items/" + theItem.name + ".png'/>");
+        $("#inventoryContainer").append("<div class=\"col\"><img id='inventory:" + iIndex + "' class='" + itemType + " inventoryItem' src='/assets/images/items/" + theItem.name + ".png'/>");
         iIndex = iIndex + 1;
     });
 
     if (actualPlayer.inventory.length == 0)
         $("#topInventoryContainer").append("<p class=\"centered\">Inventory is empty.</p>");
 }
-
 
 function buildFields(area) {
     $("#playground").append("<table id='myPlaygroundTable'/>");
@@ -181,26 +250,57 @@ function markAttackableFields(attackableFields) {
     });
 }
 
-function loadJson() {
-    $.ajax({
-        method: "GET",
-        url: "/json",
-        dataType: "json",
-
-        success: function (result) {
-            console.log(result);
-
-            checkDefeat(result.status.players)
-
-            buildInfoBoardContainer(result.status);
-            buildZombieContainer(result.zombies);
-            buildPlayerContainer(result);
-            buildStatusContainer(result.actualPlayer);
-            buildInventoryContainer(result.actualPlayer);
-            buildFields(result.area);
-            markAttackableFields(result.attackableFields);
-            initStatus();
-            listenToAttackableFields();
+function bindArrowkeys() {
+    window.addEventListener("keydown", function (event) {
+        if (event.defaultPrevented) {
+            return; // Do nothing if the event was already processed
         }
-    });
+
+        switch (event.key) {
+            case "ArrowDown":
+                document.location.href = "/move/down";
+                break;
+            case "ArrowUp":
+                document.location.href = "/move/up";
+                break;
+            case "ArrowLeft":
+                document.location.href = "/move/left";
+                break;
+            case "ArrowRight":
+                document.location.href = "/move/right";
+                break;
+            default:
+                return; // Quit when this doesn't handle the key event.
+        }
+
+        // Cancel the default action to avoid it being handled twice
+        event.preventDefault();
+    }, true);
+}
+
+function buildUp(result) {
+    console.log(result);
+
+    checkDefeat(result.status.players)
+
+    buildInfoBoardContainer(result.status);
+    buildZombieContainer(result.zombies);
+    buildPlayerContainer(result);
+    buildStatusContainer(result.actualPlayer);
+    buildInventoryContainer(result.actualPlayer);
+    buildFields(result.area);
+    markAttackableFields(result.attackableFields);
+    initStatus();
+    listenToAttackableFields();
+    bindArrowkeys();
+}
+
+function cleanUp() {
+    $("#playground").children().remove();
+    $("#topInventoryContainer").children().remove();
+    $("#equippedWeapon").children().remove();
+    $("#zombieContainer").children().remove();
+    $("#playerContainer").children().remove();
+    $("#infoBoard").children().remove();
+    $("#status").children().remove();
 }

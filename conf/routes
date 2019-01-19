@@ -28,3 +28,6 @@ GET        /json                    controllers.HomeController.getJson
 
 # Polymer
 GET        /polymer                 controllers.HomeController.polymer
+
+# Web Sockets Teritory
+GET        /webSockets                controllers.HomeController.webSocketJson
