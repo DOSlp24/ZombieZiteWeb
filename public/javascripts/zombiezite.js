@@ -238,16 +238,9 @@ function loadJson() {
             initStatus();
             listenToAttackableFields();
             bindArrowkeys();
+
+            VueStuff(result)
         }
     });
-    
-    /* --- Vue Stuff --- */
 
-    var inventoryContainer = new Vue({
-        el: '#inventoryContainer',
-        data: {
-            item: 'VueItem'
-        }
-
-    })
 }
