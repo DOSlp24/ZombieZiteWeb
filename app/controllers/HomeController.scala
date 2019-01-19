@@ -145,8 +145,8 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit system: ActorS
 
           println("Attack Received!")
           val coordinate = msg.slice(5, msg.length).split("-")
-          val x = Integer.parseInt(coordinate.apply(0).trim())
-          val y = Integer.parseInt(coordinate.apply(1).trim())
+          val x = Integer.parseInt(coordinate.apply(1).trim())
+          val y = Integer.parseInt(coordinate.apply(0).trim())
 
           println("Attacking" + x + " " + y)
 
