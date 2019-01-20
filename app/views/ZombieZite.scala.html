@@ -6,7 +6,7 @@
         <script src="@routes.Assets.versioned("javascripts/zombiezite.js")" type="text/javascript"></script>
     </head>
 
-    <div id="mainContainer" class="container-fluid centered">
+    <div id="mainContainer" class="container-fluid">
         <div id="nonPlayground" class="container">
             <div id="controlContainer" class="border border-dark">
                 <div class="col-sm-3">
@@ -58,7 +58,7 @@
                 <div id="status" class="container border-right border-dark">
                 </div>
                 <div id="inventory" class="container">
-                    <div id="topInventory" class="row text-center">
+                    <div class="row text-center">
                         <div class="col-9">
                             <h1>Equipment</h1>
                         </div>
@@ -66,12 +66,12 @@
                             <h1 id="inventoryTrash" class="alert-danger">Trash</h1>
                         </div>
                     </div>
-                    <div id="inventoryItemsContainer" class="container">
+                    <div class="container">
                         <div id="inventoryEquipped" class="row centered">
-                            <div class="col" id="equippedWeapon">
+                            <div id="equippedWeapon" class="col">
                             </div>
                         </div>
-                        <div class="row" id="inventoryContainer">
+                        <div id="inventoryContainer" class="row">
                         </div>
                     </div>
                 </div>

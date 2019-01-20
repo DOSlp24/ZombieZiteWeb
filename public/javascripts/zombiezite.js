@@ -134,7 +134,7 @@ function buildInventoryContainer(actualPlayer) {
     });
 
     if (actualPlayer.inventory.length == 0)
-        $("#topInventoryContainer").append("<p class=\"text-center\">Inventory is empty.</p>");
+        $("#inventoryContainer").append("<p class=\"text-center\">Inventory is empty.</p>");
 }
 
 
