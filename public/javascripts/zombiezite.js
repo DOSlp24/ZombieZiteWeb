@@ -42,7 +42,7 @@ function createSocket() {
     socket.onmessage = function (message) {
         if (socket.readyState == 1) {
             if (message.data == "Winner") {
-                location.href = "/about"; //TODO Put the Winning Screen here
+                location.href = "/win";
             } else if (message.data == "Loser") {
                 location.href = "/dead ";
             } else {
@@ -271,8 +271,6 @@ function bindArrowkeys() {
 function buildUp(result) {
     console.log(result);
 
-    checkDefeat(result.status.players)
-
     buildInfoBoardContainer(result.status);
     buildZombieContainer(result.zombies);
     buildPlayerContainer(result);
@@ -287,7 +285,9 @@ function buildUp(result) {
 
 function cleanUp() {
     $("#playground").children().remove();
+    $("#infoContainer").children().remove();
     $("#topInventoryContainer").children().remove();
+    $("#inventoryContainer").children().remove();
     $("#equippedWeapon").children().remove();
     $("#zombieContainer").children().remove();
     $("#playerContainer").children().remove();
