@@ -1,0 +1,145 @@
+#mainContainer {
+    display: flex;
+    flex-direction: row-reverse;
+
+    /* darkMode
+    background: dimgrey;
+    */
+}
+
+#playground{
+    width: auto;
+    height: 100%;
+}
+
+#nonPlayground {
+    width: auto;
+    height: 100%;
+}
+
+#statContainer {
+    display: flex;
+}
+
+#controlContainer {
+    display: flex;
+}
+
+#status {
+    width: 30%;
+}
+
+#inventoryTrash {
+    display: None;
+}
+
+#inventoryEquipped {
+    text-align: center;
+    margin: 2px;
+}
+
+
+/* classes  */
+.buttonScale {
+    height: auto;
+    width: auto;
+}
+
+.buttonLink {
+    margin: 2px;
+}
+
+.inventoryItem {
+    margin: 2px;
+}
+
+.myTableBuffer {
+    margin-right: 5%;
+    margin-left: 5%;
+}
+
+.field {
+    border: medium ridge coral;
+    width: 105px;
+    height: 105px;
+    text-align: center;
+    margin: 0px;
+    box-sizing: content-box;
+}
+
+.attackableField {
+    border-color: #721c24;
+    background-color: #c82333;
+}
+
+.zombieImage {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.playerImage {
+    display: inline-block;
+    overflow: hidden;
+}
+
+
+/* IDs from JS */
+#playerPortrait {
+    margin: auto;
+}
+
+#actualPlayer {
+    color: coral;
+}
+
+
+/* IDs from nearby pages */
+#topAbout {
+    margin: 5px;
+    padding: 5px;
+}
+
+#defeat {
+    background: red;
+}
+
+#victory {
+    background: lawngreen;
+}
+
+.hardShade{
+    background: #f5f5f5;
+    border: 1px solid #DDD;
+    box-shadow: 3px 3px 0px rgba(0,0,0, .2);
+}
+
+.aboutSearch{
+    background-color: greenyellow;
+}
+
+.aboutMove{
+    background-color: darkgrey;
+}
+.aboutWait{
+    background-color: dodgerblue;
+}
+.aboutAttack{
+    background-color: red;
+}
+
+
+/* Responsive stuff. Rearrange if necessary */
+/* When the width is not above 1850px - smaller screen */
+@media screen and (max-width: 1850px) {
+
+    div.text-info {
+        /* This is an example to show screen size. Delete if obsolete!*/
+        background: yellow;
+    }
+
+    #mainContainer {
+        display: flex;
+        flex-direction: column;
+    }
+
+}

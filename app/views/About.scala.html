@@ -1,26 +1,24 @@
 @()
-
-    @main("ZombieZite!") {
-    <script src="@routes.Assets.versioned("javascripts/vue.js")" ></script>
-    <script src="@routes.Assets.versioned("javascripts/zombieVue.js")" ></script>
-        <div class="hardShade" id="topAbout">
-            <h1 class="centered">ZombieZite – a free browser game</h1>
-            <p class="centered">Welcome to the world of ZombieZite, an amazing game where you fight for your survival.</p>
-            <p>ZombieZite is a nice mix of RPG and turn based strategy. Up to four characters enter an arena, trying not to
-                get eaten by Zombies. Stop the undead by shooting them in the head. There are plenty Weapons to choose from!
-                But be careful: There is friendly-fire, so are up for teamwork or a rogue?</p>
-            <p>Lay out your strategy. Where do you want to fight the Zombies? Which Weapons are you using? Always keep a
-                cool head and watch out for these runners.</p>
-            <p>Move your character around with the <span class="aboutMove">ARROW buttons</span> on the screen.</p>
-            <p>You can find loot anywhere in the arena. With the <span class="aboutSearch">SEARCH</span>
-                button you pick up
-                the nearest item.</p>
-            <p>Take a strategical break with the <span class="aboutWait">WAIT button</span>.</p>
-            <p><span class="aboutAttack">Attack</span> by clicking a field in the arena which is highlighted
-                <span class="aboutAttack">RED</span>.</p>
-            <p>Find different Armor and Weapons to defend yourself. Some Zombies have evolved, but you will find that out
-                soon enough.</p>
-            <p>Jump in right now by clicking New Game!</p>
-        </div>
-        <weapon-list></weapon-list>
-    }
+@main("ZombieZite!") {
+    <div class="hardShade" id="topAbout">
+        <h1 class="centered">ZombieZite – a free browser game</h1>
+        <p class="centered">Welcome to the world of ZombieZite, an amazing game where you fight for your survival.</p>
+        <p>ZombieZite is a nice mix of RPG and turn based strategy. Up to four characters enter an arena, trying not to
+            get eaten by Zombies. Stop the undead by shooting them in the head. There are plenty Weapons to choose from!
+            But be careful: There is friendly-fire, so are up for teamwork or a rogue?</p>
+        <p>Lay out your strategy. Where do you want to fight the Zombies? Which Weapons are you using? Always keep a
+            cool head and watch out for these runners.</p>
+        <p>Move your character around with the <span class="aboutMove">ARROW buttons</span> on the screen.</p>
+        <img src='/assets/images/items/Pan.png' class="rounded" alt="Loot!!">
+        <p>You can find loot anywhere in the arena. With the <span class="aboutSearch">SEARCH</span> button you pick up
+            the nearest item.</p>
+        <p>Take a strategical break with the <span class="aboutWait">WAIT button</span>.</p>
+        <p><span class="aboutAttack">Attack</span> by clicking a field in the arena which is highlighted
+            <span class="aboutAttack">RED</span>.</p>
+        <p>Find different Armor and Weapons to defend yourself. Equip these via drag & drop.</p>
+        <p>Some Zombies have evolved, but you will find that out soon enough.</p>
+        <img src='/assets/images/zombies/Runner.png' class="rounded float-left" alt="A Zombie!!">
+        <p>Jump in right now by clicking New Game!</p>
+    </div>
+    <weapon-list></weapon-list>
+}

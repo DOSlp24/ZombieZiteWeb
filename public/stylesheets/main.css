@@ -73,9 +73,24 @@
     font-size: 4em;
 }
 
-#buttonScale {
-    width: auto;
-    height: auto;
+
+#topAbout {
+    margin: 5px;
+    padding: 5px;
+}
+
+#defeat {
+    background: red;
+    height: 100%;
+}
+
+
+#victory {
+    background: lawngreen;
+}
+
+.buttonScale {
+    margin: 5px;
 }
 
 #topAbout {
@@ -108,10 +123,6 @@
     height: 105px;
     text-align: center;
     margin: 0px;
-}
-
-.centered {
-    text-align: center;
 }
 
 .text-info{

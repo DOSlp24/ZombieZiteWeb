@@ -238,6 +238,10 @@ class HomeController @Inject()(cc: ControllerComponents)(implicit system: ActorS
     Ok(views.html.dead())
   }
 
+  def win() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.win())
+  }
+
   def newGame(num: String) = Action { implicit request: Request[AnyContent] =>
     c.init(Integer.parseInt(num))
     Ok(views.html.ZombieZite(c))
