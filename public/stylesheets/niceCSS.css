@@ -1,0 +1,80 @@
+#mainContainer {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#nonPlayground {
+    width: 40%;
+    height: 100%;
+    margin: 3px;
+}
+
+#playerContainer {
+}
+
+#infoBoard {
+}
+
+#statContainer {
+}
+
+#status {
+}
+
+#inventory {
+}
+
+#inventoryTrash {
+}
+
+#inventoryItemsContainer {
+}
+
+#equippedWeapon {
+}
+
+#inventoryContainer {
+}
+
+#zombieContainer {
+}
+
+#playground {
+}
+
+#topAbout {
+    margin: 5px;
+    padding: 5px;
+}
+
+#defeat {
+    background: red;
+    height: 100%;
+}
+
+#victory {
+    background: lawngreen;
+}
+
+
+.buttonScale {
+}
+
+
+
+
+/* Responsive stuff. Rearrange if necessary */
+/* When the width is not above 1850px - smaller screen */
+@media screen and (max-width: 1850px) {
+
+    div.text-info {
+        /* This is an example to show screen size. Delete if obsolete!*/
+        background: yellow;
+    }
+
+    #mainContainer {
+        display: flex;
+        flex-direction: column;
+    }
+
+}

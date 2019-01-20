@@ -102,9 +102,9 @@ function buildPlayerContainer(result) {
 
 
 function buildInfoBoardContainer(status) {
-    $("#infoBoard").append("<h1 class=\"centered headline\">Info Board</h1>");
-    $("#infoBoard").append("<div class='text-info'>Runde "+status.round+"</div>");
-    $("#infoBoard").append("<div class='text-info'>"+status.kills+"/" +status.winCount+ "Zombies erledigt.</div>");
+    $("#infoContainer").append("<h1 class=\"centered headline\">Info Board</h1>");
+    $("#infoContainer").append("<div class='text-info'>Runde "+status.round+"</div>");
+    $("#infoContainer").append("<div class='text-info'>"+status.kills+"/" +status.winCount+ "Zombies erledigt.</div>");
 }
 
 

@@ -6,20 +6,20 @@
         <script src="@routes.Assets.versioned("javascripts/zombiezite.js")" type="text/javascript"></script>
     </head>
 
-    <div id="mainContainer">
-        <div id="nonPlayground">
-            <div class="container row">
-                <div class="col-sm-3 borderedRight borderedBottom" id="playerContainer" align="center">
+    <div id="mainContainer" class="container-fluid centered">
+        <div id="nonPlayground" class="container border border-dark">
+            <div id="controlContainer" class="container row">
+                <div id="playerContainer" class="col-sm-3" align="center">
                 </div>
-                <div class="col-sm-3 borderedRight borderedBottom" id="infoBoard" align="center">
+                <div id="infoContainer"class="col-sm-3"  align="center">
                 </div>
-                <div class="col-sm-6 borderedRight borderedBottom buttonScale" align="center">
-                    <div class="row justify-content-center smallMarginBottom">
+                <div id="buttonContainer" class="col-sm-6buttonScale" align="center">
+                    <div class="row justify-content-center">
                         <a class="btn btn-dark" href="/move/up">
                             <img class="buttonScale" src="@routes.Assets.versioned("images/icons/Up.png")"/>
                         </a>
                     </div>
-                    <div class="row justify-content-center bigMarginBottom">
+                    <div class="row justify-content-center">
                         <a class="btn btn-dark" href="/move/left">
                             <img class="buttonScale" src="@routes.Assets.versioned("images/icons/Left.png")"/>
                         </a>
@@ -51,34 +51,31 @@
             <div id="statContainer">
                 <div id="status">
                 </div>
-                <div id="inventory">
-                    <div class="container">
-                        <div class="row centered">
-                            <div class="col">
-                                <h1 class="centered headline">Equipment</h1>
-                            </div>
-                            <div class="col">
-                                <h1 id="inventoryTrash" class="alert-danger">Trash</h1>
-                            </div>
+                <div id="inventory" class="container">
+                    <div class="row centered">
+                        <div class="col">
+                            <h1 class="centered">Equipment</h1>
+                        </div>
+                        <div class="col">
+                            <h1 id="inventoryTrash" class="alert-danger">Trash</h1>
                         </div>
                     </div>
-                    <div class="container" id="topInventoryContainer">
+                    <div id="inventoryItemsContainer" class="container">
                         <div class="row centered smallMarginBottom">
                             <div class="col" id="equippedWeapon">
                             </div>
                         </div>
                         <div class="row" id="inventoryContainer">
-                            <h1>{{ item }}</h1>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="zombieContainer">
+            <div id="zombieContainer" class="container">
             </div>
         </div>
 
-        <div id="playground">
+        <div id="playground" class="container">
         </div>
     </div>
 }
