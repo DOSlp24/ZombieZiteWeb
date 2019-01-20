@@ -73,10 +73,6 @@
     font-size: 4em;
 }
 
-#buttonScale {
-    width: auto;
-    height: auto;
-}
 
 #topAbout {
     margin: 5px;
@@ -91,6 +87,10 @@
 
 #victory {
     background: lawngreen;
+}
+
+.buttonScale {
+    margin: 5px;
 }
 
 .title {

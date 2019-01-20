@@ -76,13 +76,14 @@ function buildZombieContainer(zombies) {
     $("#zombieContainer").append("<h1 class=\"centered headline\">Zombies</h1>");
     $("#zombieContainer").append("<ul id='zombieContainerList'/>");
     zombies.forEach(function (actualZombie) {
-        $("#zombieContainerList").append("<li>" + actualZombie.name + ":(" + actualZombie.actualPosition.x + "," + actualZombie.actualPosition.y + ")" + actualZombie.lifePoints + " LP </li>");
+        $("#zombieContainerList").append("<li>" + actualZombie.name + ": (" + actualZombie.actualPosition.x + "," + actualZombie.actualPosition.y + ") " + actualZombie.lifePoints + " LP </li>");
     });
 }
 
 
 function buildPlayerContainer(result) {
-    $("#playerContainer").append("<img src='/assets/images/players/" + result.actualPlayer.name + " por.png'/>");
+    /* This hides the portrait on small screens: class='d-none d-lg-block'*/
+    $("#playerContainer").append("<img id='playerPortrait' class='d-none d-lg-block' src='/assets/images/players/" + result.actualPlayer.name + " por.png'/>");
 
     $("#playerContainer").append("<div id='playerContainerList'/>");
     result.status.players.forEach(function (thePlayer) {
@@ -102,19 +103,19 @@ function buildPlayerContainer(result) {
 
 
 function buildInfoBoardContainer(status) {
-    $("#infoContainer").append("<h1 class=\"centered headline\">Info Board</h1>");
+    $("#infoContainer").append("<h1 class=\"centered\">Info Board</h1>");
     $("#infoContainer").append("<div class='text-info'>Runde "+status.round+"</div>");
     $("#infoContainer").append("<div class='text-info'>"+status.kills+"/" +status.winCount+ "Zombies erledigt.</div>");
 }
 
 
 function buildStatusContainer(actualPlayer) {
-    $("#status").append("<h1 class=\"centered headline\">Status</h1>");
-    $("#status").append("<p class='centered'>My Field: (" + actualPlayer.actualPosition.x + "," + actualPlayer.actualPosition.y + ")</p>");
-    $("#status").append("<p class=\"centered\">LP: "+ actualPlayer.lifePoints +"</p>");
-    $("#status").append("<p class=\"centered\">Strength: "+ actualPlayer.strength +"</p>");
-    $("#status").append("<p class=\"centered\">Armor: "+ actualPlayer.armor +"</p>");
-    $("#status").append("<p class=\"centered\">Equiped Weapon: "+ actualPlayer.equippedWeapon.name +"</p>");
+    $("#status").append("<h1 class=\"text-center\">Status</h1>");
+    $("#status").append("<p class='text-center'>My Field: (" + actualPlayer.actualPosition.x + "," + actualPlayer.actualPosition.y + ")</p>");
+    $("#status").append("<p class=\"text-center\">LP: "+ actualPlayer.lifePoints +"</p>");
+    $("#status").append("<p class=\"text-center\">Strength: "+ actualPlayer.strength +"</p>");
+    $("#status").append("<p class=\"text-center\">Armor: "+ actualPlayer.armor +"</p>");
+    $("#status").append("<p class=\"text-center\">Equiped Weapon: "+ actualPlayer.equippedWeapon.name +"</p>");
 }
 
 
@@ -131,7 +132,7 @@ function buildInventoryContainer(actualPlayer) {
         if (theItem.name === "Boots" || theItem.name === "Chest" || theItem.name === "Healkit" || theItem.name === "Holy Armor" || theItem.name === "Swat-Shield")
             itemType = "inventoryArmor";
 
-        $("#inventoryContainer").append("<div class=\"col\"><img id='inventory:"+ iIndex+"' class='"+itemType+" inventoryItem' src='/assets/images/items/" + theItem.name + ".png'/>");
+        $("#inventoryContainer").append("<div class=\"col-4\"><img id='inventory:"+ iIndex+"' class='"+itemType+" inventoryItem' src='/assets/images/items/" + theItem.name + ".png'/>");
         iIndex = iIndex + 1;
     });
 

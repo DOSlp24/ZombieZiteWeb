@@ -1,13 +1,19 @@
 #mainContainer {
     display: flex;
     flex-direction: row-reverse;
+
+    /* darkMode */
+    background: dimgrey;
 }
 
 #nonPlayground {
-    width: 60%;
+    width: auto;
     height: 100%;
-    margin: 3px;
 }
+
+#playground {
+}
+
 
 #playerContainer {
 }
@@ -16,15 +22,27 @@
 }
 
 #statContainer {
+    display: flex;
 }
 
-#status {
+#controlContainer {
+    display: flex;
 }
+
 
 #inventory {
 }
 
+#topInventory {
+
+}
+
 #inventoryTrash {
+    display: None;
+}
+
+#inventoryEquipped {
+    text-align: center;
 }
 
 #inventoryItemsContainer {
@@ -39,8 +57,37 @@
 #zombieContainer {
 }
 
-#playground {
+
+/* classes  */
+.buttonScale {
+    height: auto;
+    width: auto;
 }
+
+.buttonLink {
+    margin: 2px;
+}
+
+.inventoryItem {
+    margin: 2px;
+}
+
+.myTableBuffer {
+    margin-right: 5%;
+    margin-left: 5%;
+}
+
+/*
+.item {
+    font-size: 16px;
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    height: 50%;
+    position: relative;
+    overflow: hidden;
+}
+*/
 
 /* IDs from JS */
 #zombieContainerList {
@@ -49,7 +96,12 @@
 #playerContainerList {
 }
 
+#playerPortrait {
+    margin: auto;
+}
+
 #actualPlayer {
+    color: coral;
 }
 
 #notActualPlayer {
@@ -58,17 +110,10 @@
 #actionCounter {
 }
 
-#inventory:"+ iIndex+" {
-}
 
 #myPlaygroundTable {
 }
 
-#playgroundTr" + area.fields.indexOf(line) + " {
-}
-
-#field" + $y + "-" + $x + " {
-}
 
 /* IDs from nearby pages */
 #topAbout {
@@ -85,23 +130,25 @@
     background: lawngreen;
 }
 
-/* classes  */
-.buttonScale {
+
+.hardShade{
+    background: #f5f5f5;
+    border: 1px solid #DDD;
+    box-shadow: 3px 3px 0px rgba(0,0,0, .2);
 }
 
-.myTableBuffer {
-    margin-right: 5%;
-    margin-left: 5%;
+.aboutSearch{
+    background-color: greenyellow;
 }
 
-.item {
-    font-size: 16px; /*reset font size*/
-    display: inline-block;
-    vertical-align: top;
-    width: 50%;
-    height: 50%;
-    position: relative;
-    overflow: hidden; /*no scrollbar*/
+.aboutMove{
+    background-color: darkgrey;
+}
+.aboutWait{
+    background-color: dodgerblue;
+}
+.aboutAttack{
+    background-color: red;
 }
 
 
