@@ -9,15 +9,15 @@
     <div id="mainContainer" class="container-fluid centered">
         <div id="nonPlayground" class="container">
             <div id="controlContainer" class="border border-dark">
-                <div class="col-3">
+                <div class="col-sm-3">
                     <div id="playerContainer" class="text-center">
                     </div>
                 </div>
-                <div class="col-3 border-left border-right border-dark">
+                <div class="col-sm-3 border-left border-right border-dark">
                     <div id="infoContainer"class="text-center">
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-sm-6">
                     <div id="buttonContainer" class="text-center">
                         <div class="row justify-content-center">
                             <a class="btn btn-dark buttonLink" href="/move/up">
@@ -55,27 +55,23 @@
             </div>
 
             <div id="statContainer" class="container border border-dark">
-                <div class="col-3">
-                    <div id="status" class="container border-right border-dark">
-                    </div>
+                <div id="status" class="container border-right border-dark">
                 </div>
-                <div class="col-9">
-                    <div id="inventory" class="container">
-                        <div id="topInventory" class="row text-center">
-                            <div class="col-9">
-                                <h1 class="centered">Equipment</h1>
-                            </div>
-                            <div class="col-3">
-                                <h1 id="inventoryTrash" class="alert-danger">Trash</h1>
+                <div id="inventory" class="container">
+                    <div id="topInventory" class="row text-center">
+                        <div class="col-9">
+                            <h1>Equipment</h1>
+                        </div>
+                        <div class="col-3">
+                            <h1 id="inventoryTrash" class="alert-danger">Trash</h1>
+                        </div>
+                    </div>
+                    <div id="inventoryItemsContainer" class="container">
+                        <div id="inventoryEquipped" class="row centered">
+                            <div class="col" id="equippedWeapon">
                             </div>
                         </div>
-                        <div id="inventoryItemsContainer" class="container">
-                            <div id="inventoryEquipped" class="row centered">
-                                <div class="col" id="equippedWeapon">
-                                </div>
-                            </div>
-                            <div class="row" id="inventoryContainer">
-                            </div>
+                        <div class="row" id="inventoryContainer">
                         </div>
                     </div>
                 </div>
