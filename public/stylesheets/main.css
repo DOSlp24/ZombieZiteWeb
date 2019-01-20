@@ -93,6 +93,11 @@
     margin: 5px;
 }
 
+#topAbout {
+    margin: 5px;
+    padding: 5px;
+}
+
 .title {
     width: fit-content;
     margin-left: auto;
