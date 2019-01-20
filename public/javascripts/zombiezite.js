@@ -84,7 +84,7 @@ function buildZombieContainer(zombies) {
 function buildPlayerContainer(result) {
     $("#playerContainer").append("<img src='/assets/images/players/" + result.actualPlayer.name + " por.png'/>");
 
-    $("#playerContainer").append("<ul id='playerContainerList'/>");
+    $("#playerContainer").append("<div id='playerContainerList'/>");
     result.status.players.forEach(function (thePlayer) {
         if (thePlayer.name === result.actualPlayer.name)
             $("#playerContainerList").append( "<p id='actualPlayer' class='centered'>>"+thePlayer.name+"</p>");
