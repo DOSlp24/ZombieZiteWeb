@@ -1,0 +1,50 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /                                controllers.ApplicationController.index
+GET         /signOut                         controllers.ApplicationController.signOut
+GET         /authenticate/:provider          controllers.SocialAuthController.authenticate(provider)
+
+GET         /signUp                          controllers.SignUpController.view
+POST        /signUp                          controllers.SignUpController.submit
+
+GET         /signIn                          controllers.SignInController.view
+POST        /signIn                          controllers.SignInController.submit
+
+GET         /password/forgot                 controllers.ForgotPasswordController.view
+POST        /password/forgot                 controllers.ForgotPasswordController.submit
+GET         /password/reset/:token           controllers.ResetPasswordController.view(token: java.util.UUID)
+POST        /password/reset/:token           controllers.ResetPasswordController.submit(token: java.util.UUID)
+GET         /password/change                 controllers.ChangePasswordController.view
+POST        /password/change                 controllers.ChangePasswordController.submit
+
+GET         /account/email/:email            controllers.ActivateAccountController.send(email: String)
+GET         /account/activate/:token         controllers.ActivateAccountController.activate(token: java.util.UUID)
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file                    controllers.Assets.at(path="/public", file)
+GET         /webjars/*file                   controllers.WebJarAssets.at(file)
+
+
+
+GET        /about                     controllers.HomeController.about
+GET        /playground                controllers.HomeController.showPlayground
+GET        /new/*num                  controllers.HomeController.newGame(num)
+GET        /dead                      controllers.HomeController.dead
+
+# Communication
+GET        /wait                      controllers.HomeController.callWait
+GET        /search                    controllers.HomeController.callSearch
+GET        /move/*direction           controllers.HomeController.callMove(direction: String)
+GET        /attackField/*coord        controllers.HomeController.attackField(coord: String)
+
+GET        /equipArmor/*index         controllers.HomeController.equipArmor(index: String)
+GET        /equipWeapon/*index        controllers.HomeController.equipWeapon(index: String)
+GET        /unequipWeapon             controllers.HomeController.unequipWeapon
+GET        /trashItem/*index          controllers.HomeController.trashItem(index: String)
+# Map static resources from the /public folder to the /assets URL path
+
+# Ajax Stuff
+GET        /json                      controllers.HomeController.ajaxJson

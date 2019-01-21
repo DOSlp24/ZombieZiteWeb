@@ -1,0 +1,19 @@
+@import play.api.i18n.Messages
+@import play.api.mvc.RequestHeader
+@import play.twirl.api.Html
+
+@()(implicit request: RequestHeader, messages: Messages, webJarAssets: WebJarAssets)
+
+
+@mainframe("Defeat!", None) {
+    <div class = "centered" id="defeat">
+        <h1>You are dead!</h1>
+        <p>All players were wiped out.</p>
+
+        <img src='/assets/images/zombies/Runner.png'/>
+        <img src='/assets/images/zombies/Tank.png'/>
+        <img src='/assets/images/zombies/Schlurfer.png'/>
+
+        <p><strong>Better luck next time...</strong></p>
+    </div>
+}

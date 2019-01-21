@@ -1,0 +1,90 @@
+@import play.api.i18n.Messages
+@import play.api.mvc.RequestHeader
+@import play.twirl.api.Html
+@(controller: de.htwg.se.zombiezite.controller.ControllerInterface)(implicit request: RequestHeader, messages: Messages, webJarAssets: WebJarAssets)
+
+@mainframe("Welcome to the Zombie Pit!", None) {
+    <head>
+        <script src="/assets/javascripts/zombiezite.js") type="text/javascript"></script>
+    </head>
+
+    <div id="mainContainer" class="container-fluid">
+        <div id="nonPlayground" class="container">
+            <div id="controlContainer" class="border border-dark">
+                <div class="col-sm-3">
+                    <div id="playerContainer" class="text-center">
+                    </div>
+                </div>
+                <div class="col-sm-3 border-left border-right border-dark">
+                    <div id="infoContainer"class="text-center">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div id="buttonContainer" class="text-center">
+                        <div class="row justify-content-center">
+                            <a id="moveUpButton" class="btn btn-dark buttonLink">
+                                <img class="buttonScale" src="/assets/images/icons/Up.png")/>
+                            </a>
+                        </div>
+                        <div class="row justify-content-center">
+                            <a id="moveLeftButton" class="btn btn-dark buttonLink">
+                                <img class="buttonScale" src="/assets/images/icons/Left.png")/>
+                            </a>
+                            <a id="moveDownButton" class="btn btn-dark buttonLink">
+                                <img class="buttonScale" src="/assets/images/icons/Down.png")/>
+
+                            </a>
+                            <a id="moveRightButton" class="btn btn-dark buttonLink">
+                                <img class="buttonScale" src="/assets/images/icons/Right.png")/>
+                            </a>
+                        </div>
+                        <div class="row justify-content-center">
+                            <a id="searchButton" class="btn btn-success buttonLink">
+                                <img class="buttonScale" src="/assets/images/icons/Search.png")/>
+                                Search
+                            </a>
+                            <a id="waitButton" class="btn btn-primary buttonLink">
+                                <img class="buttonScale" src="/assets/images/icons/Wait.png")/>
+                                Wait
+                            </a>
+                            <a class="btn btn-danger buttonLink">
+                                <img class="buttonScale" src="/assets/images/icons/Attack.png")/>
+                                Attack
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="statContainer" class="container border border-dark">
+                <div id="status" class="container border-right border-dark">
+                </div>
+                <div id="inventory" class="container">
+                    <div class="row text-center">
+                        <div class="col-9">
+                            <h1>Equipment</h1>
+                        </div>
+                        <div class="col-3">
+                            <h1 id="inventoryTrash" class="alert-danger">Trash</h1>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div id="inventoryEquipped" class="row centered">
+                            <div id="equippedWeapon" class="col">
+                            </div>
+                        </div>
+                        <div id="inventoryContainer" class="row">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="zombieContainer" class="container border border-dark">
+            </div>
+        </div>
+
+        <div id="playground" class="container">
+        </div>
+    </div>
+}
+

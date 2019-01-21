@@ -1,0 +1,9 @@
+@import play.api.i18n.Messages
+@import play.api.mvc.RequestHeader
+@import play.twirl.api.Html
+@()(implicit request: RequestHeader, messages: Messages, webJarAssets: WebJarAssets)
+
+@mainframe("Welcome to the Zombie Pit!", None) {
+
+    <h1 id="title" class="text-center">Welcome to the Game!</h1>
+}
