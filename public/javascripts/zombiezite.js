@@ -54,7 +54,7 @@ function createSocket() {
         }
 
     };
-    socket.onclose = function () {
+    socket.onclose = function (evt) {
         console.log("Socket Closed!");
     };
 }

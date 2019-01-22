@@ -48,3 +48,9 @@ GET        /trashItem/*index          controllers.HomeController.trashItem(index
 
 # Ajax Stuff
 GET        /json                      controllers.HomeController.ajaxJson
+
+# Polymer
+GET        /polymer                 controllers.HomeController.polymer
+
+# Web Sockets Teritory
+GET        /webSockets                controllers.HomeController.webSocketJson
