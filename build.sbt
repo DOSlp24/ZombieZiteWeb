@@ -11,6 +11,7 @@ scalaVersion := "2.11.8"
 resolvers += Resolver.jcenterRepo
 
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
+libraryDependencies <+= scalaVersion("org.scala-lang" % "scala-compiler" % _ )
 
 libraryDependencies ++= Seq(
   "com.mohiva" %% "play-silhouette" % "4.0.0",
