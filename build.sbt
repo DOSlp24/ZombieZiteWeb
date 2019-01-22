@@ -2,7 +2,7 @@ import com.typesafe.sbt.SbtScalariform._
 
 import scalariform.formatter.preferences._
 
-name := "ZombieZiteWeb"
+name := "play-silhouette-seed"
 
 version := "4.0.0"
 
