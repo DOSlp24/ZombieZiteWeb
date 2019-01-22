@@ -8,7 +8,7 @@ $(document).ready(function () {
 var socket;
 
 function createSocket() {
-    socket = new WebSocket("ws://localhost:9000/webSockets");
+    socket = new WebSocket("ws://zombieziteweb.herokuapp.com//webSockets");
     socket.setTimeout;
 
     $("#moveUpButton").click(function () {
