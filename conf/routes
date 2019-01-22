@@ -54,3 +54,5 @@ GET        /polymer                 controllers.HomeController.polymer
 
 # Web Sockets Teritory
 GET        /webSockets                controllers.HomeController.webSocketJson
+
+GET     /favicon.ico                        controllers.Assets.at(path="/public/images", file="favicon.ico")
